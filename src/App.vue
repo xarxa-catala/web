@@ -1,9 +1,11 @@
 <template>
   <div id="nav">
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
+    <img id="logo" alt="One Piece Català logo" src="./assets/web_icon.jpg">
+    <div class="spacer"/>
+    <button type="button" class="btn btn-outline-primary">Inici</button>
+    <button type="button" class="btn btn-outline-primary">Sobre nosaltres</button>
   </div>
-  <router-view/>
+  <router-view class="router"/>
 </template>
 
 <style lang="scss">
@@ -16,15 +18,23 @@
 }
 
 #nav {
-  padding: 30px;
+  height: 50px;
+  display: flex;
+  position: fixed; /* Set the navbar to fixed position */
+  top: 0; /* Position the navbar at the top of the page */
+  width: 100%; /* Full width */
+}
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+#logo {
+  height: 100px; 
+  width: 100px;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.spacer {
+  flex-grow: 10;
+}
+
+.router {
+  margin-top: 100px;
 }
 </style>
