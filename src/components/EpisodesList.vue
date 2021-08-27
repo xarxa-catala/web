@@ -5,6 +5,8 @@
 
       <ul>
         <li
+          class="list-group-item"
+          :class="{ active: isEpisodeSelected(item) }"
           v-for="item in items"
           :key="item.id"
           v-on:click="onEpisodeSelected(item)"
@@ -29,6 +31,7 @@ export default {
   data() {
     return {
       items: null,
+      episodeSelectedId: -1,
     };
   },
   mounted() {
@@ -44,9 +47,14 @@ export default {
       });
   },
   methods: {
-    onEpisodeSelected(item) {
-      console.log(item.nom);
-      this.$emit("onEpisodeSelected", item);
+    onEpisodeSelected(episode) {
+      console.log(episode.nom);
+      this.episodeSelectedId = episode.id;
+      this.$emit("onEpisodeSelected", episode);
+    },
+
+    isEpisodeSelected(episode) {
+      return episode.id === this.episodeSelectedId;
     },
   },
 };
@@ -60,7 +68,7 @@ export default {
 }
 
 ul {
-  padding-left: 20px;
+  padding-left: 0px;
   padding-top: 0px;
   margin: 0px;
   overflow: hidden;
