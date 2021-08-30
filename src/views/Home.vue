@@ -1,19 +1,23 @@
 <template>
   <div>
-  <h2 v-if="isEpisodeSelected">{{ episodeSelected.nom }}</h2>
-  <h2 v-else>Selecciona una temporada i un episodi</h2>
+    <h2 v-if="isEpisodeSelected">{{ episodeSelected.nom }}</h2>
+    <h2 v-else>Selecciona una temporada i un episodi</h2>
 
-  <div class="home">
-    <VideoPlayer :episodeSelected="episodeSelected" :key="episodeSelected.id" id="video" />
-    <div id="seasons-episodes">
-      <Seasons @onSeasonSelected="onSeasonSelected" />
-      <EpisodesList
-        :seasonId="selectedSeasonId"
-        :key="selectedSeasonId"
-        @onEpisodeSelected="onEpisodeSelected"
+    <div class="home">
+      <VideoPlayer
+        :episodeSelected="episodeSelected"
+        :key="episodeSelected.id"
+        id="video"
       />
+      <div id="seasons-episodes">
+        <Seasons @onSeasonSelected="onSeasonSelected" />
+        <EpisodesList
+          :seasonId="selectedSeasonId"
+          :key="selectedSeasonId"
+          @onEpisodeSelected="onEpisodeSelected"
+        />
+      </div>
     </div>
-  </div>
   </div>
 </template>
 
@@ -39,14 +43,14 @@ export default {
   },
   methods: {
     onSeasonSelected(season) {
-      console.log("HOME Selected season " + season.nom)
-      this.selectedSeasonId = season.id
+      console.log("HOME Selected season " + season.nom);
+      this.selectedSeasonId = season.id;
     },
 
     onEpisodeSelected(episode) {
-      console.log("HOME Selected episode " + episode.nom)
-      this.episodeSelected = episode
-      this.isEpisodeSelected = true
+      console.log("HOME Selected episode " + episode.nom);
+      this.episodeSelected = episode;
+      this.isEpisodeSelected = true;
     },
   },
 };
@@ -64,7 +68,14 @@ export default {
   display: flex;
 }
 
-#video {
-  
-}
+/*#video-playser-container {
+  display: flex;
+  background-color: black;
+  width: 1280px;
+  height: 720px;
+}*/
+
+/*#video {
+  flex-grow: 2;
+}*/
 </style>

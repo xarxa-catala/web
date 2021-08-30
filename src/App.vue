@@ -17,7 +17,7 @@
         <ul class="navbar-nav">
           <li class="nav-item" @click="navigateTo('/')">
             <a class="nav-link"
-              :class="{ active: isCurrentPage('/') }" aria-current="page">Inici</a>
+              :class="{ active: isCurrentPage('/') }" aria-current="page">Anime Online</a>
           </li>
           <li class="nav-item" @click="navigateTo('/about')">
             <a
