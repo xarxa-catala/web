@@ -17,18 +17,17 @@
         <ul class="navbar-nav">
           <li class="nav-item" @click="navigateTo('/')">
             <a class="nav-link"
-              :class="{ active: isCurrentPage('/') }" aria-current="page" href="#">Inici</a>
+              :class="{ active: isCurrentPage('/') }" aria-current="page">Inici</a>
           </li>
           <li class="nav-item" @click="navigateTo('/about')">
             <a
               class="nav-link"
               :class="{ active: isCurrentPage('/about') }"
-              href="#"
               >Qui som?</a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Descàrregues</a>
+            <a class="nav-link">Descàrregues</a>
           </li>
         </ul>
       </div>
@@ -91,6 +90,10 @@ export default {
 
 .spacer {
   flex-grow: 10;
+}
+
+.nav-item {
+  cursor: pointer;
 }
 
 .router {
