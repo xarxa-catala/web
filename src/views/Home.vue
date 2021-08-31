@@ -67,15 +67,4 @@ export default {
 #seasons-episodes {
   display: flex;
 }
-
-/*#video-playser-container {
-  display: flex;
-  background-color: black;
-  width: 1280px;
-  height: 720px;
-}*/
-
-/*#video {
-  flex-grow: 2;
-}*/
 </style>

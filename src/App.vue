@@ -1,5 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light bg-light" id="main-navbar">
+  <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light" id="main-navbar">
     <div class="container-fluid">
       <a class="navbar-brand" href="#">One Piece Català</a>
       <button
@@ -75,27 +75,10 @@ export default {
   color: #2c3e50;
 }
 
-#nav {
-  height: 50px;
-  display: flex;
-  position: fixed; /* Set the navbar to fixed position */
-  top: 0; /* Position the navbar at the top of the page */
-  width: 100%; /* Full width */
-}
-
 #logo {
   height: 100px;
   width: 100px;
 }
-
-.spacer {
-  flex-grow: 10;
-}
-
-.nav-item {
-  cursor: pointer;
-}
-
 .router {
   margin-top: 50px;
 }

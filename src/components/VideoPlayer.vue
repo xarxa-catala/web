@@ -27,7 +27,7 @@ export default {
     };
   },
   props: {
-    episodeSelected: {url: "https://multimedia.xarxacatala.cat/one-piece/saga-1/op_cat-001.mp4"}
+    episodeSelected: {url: ""}
   },
   mount() {
     console.log("Episode URL is " + this.episodeSelected.url)
