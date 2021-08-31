@@ -79,6 +79,7 @@ li {
   flex-direction: row;
   align-content: flex-start;
   align-items: center;
+  text-align: start;
   cursor: pointer;
 }
 
