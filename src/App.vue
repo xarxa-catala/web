@@ -79,6 +79,11 @@ export default {
   height: 100px;
   width: 100px;
 }
+
+.nav-item {
+  cursor: pointer;
+}
+
 .router {
   margin-top: 50px;
 }

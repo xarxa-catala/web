@@ -31,10 +31,15 @@ export default {
   },
   mounted() {
     axios
-      .get("https://gestio.multimedia.xarxacatala.cat/api/v1/shows/4/seasons/")
+      .get(
+        "https://gestio.multimedia.xarxacatala.cat/api/v1/shows/4/playlists/"
+      )
       .then((response) => {
-        this.items = response.data;
-        console.log(response.data);
+        const playlists = response.data;
+        const sortedPlaylists = playlists.sort((a, b) => a.nom.localeCompare(b.nom));
+        this.items = sortedPlaylists;
+        console.log("sortedPlaylists:");
+        console.log(sortedPlaylists);
       });
   },
   methods: {

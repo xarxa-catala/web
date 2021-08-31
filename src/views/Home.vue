@@ -2,7 +2,6 @@
   <div>
     <h2 v-if="isEpisodeSelected">{{ episodeSelected.nom }}</h2>
     <h2 v-else>Selecciona una temporada i un episodi</h2>
-
     <div class="home">
       <VideoPlayer
         :episodeSelected="episodeSelected"
@@ -36,7 +35,7 @@ export default {
   },
   data() {
     return {
-      selectedSeasonId: 18,
+      selectedSeasonId: 3,
       episodeSelected: { id: -1 },
       isEpisodeSelected: false,
     };
