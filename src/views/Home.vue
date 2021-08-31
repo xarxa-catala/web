@@ -6,7 +6,7 @@
       <VideoPlayer
         :episodeSelected="episodeSelected"
         :key="episodeSelected.id"
-        id="video"
+        id="xc-video"
       />
       <div id="seasons-episodes">
         <Seasons @onSeasonSelected="onSeasonSelected" />
@@ -65,5 +65,9 @@ export default {
 
 #seasons-episodes {
   display: flex;
+}
+.xc-video {
+ width: 720px;
+ height: 1280px;
 }
 </style>
