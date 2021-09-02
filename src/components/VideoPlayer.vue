@@ -38,7 +38,7 @@ export default {
 <style lang="scss" scoped>
 #main-video-player {
   background-color: black;
-  width: 1280px;
-  height: 720px;
+  width: 100%;
+  height: 100%;
 }
 </style>
