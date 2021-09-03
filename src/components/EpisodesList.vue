@@ -1,8 +1,8 @@
 <template>
-  <div class="card" style="width: 18rem">
+  <div class="card">
     <div class="card-body">
       <h4 class="card-title">Episodis</h4>
-<div v-if="loading" class="progress-line"></div>
+      <div v-if="loading" class="progress-line"></div>
 
       <ul>
         <li
@@ -63,11 +63,21 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.card-body {
+.card {
   width: 300px;
+}
+.card-body {
+  width: 100%;
   height: 720px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
+}
+
+@media (max-width: 720px) {
+  .card {
+    width: 200px;
+  }
 }
 
 ul {
@@ -97,7 +107,8 @@ li {
   align-items: center;
 }
 
-.progress-line, .progress-line:before {
+.progress-line,
+.progress-line:before {
   height: 3px;
   width: 100%;
   margin: 0;
@@ -109,18 +120,36 @@ li {
 }
 .progress-line:before {
   background-color: #3f51b5;
-  content: '';
+  content: "";
   -webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
 @-webkit-keyframes running-progress {
-  0% { margin-left: 0px; margin-right: 100%; }
-  50% { margin-left: 25%; margin-right: 0%; }
-  100% { margin-left: 100%; margin-right: 0; }
+  0% {
+    margin-left: 0px;
+    margin-right: 100%;
+  }
+  50% {
+    margin-left: 25%;
+    margin-right: 0%;
+  }
+  100% {
+    margin-left: 100%;
+    margin-right: 0;
+  }
 }
 @keyframes running-progress {
-  0% { margin-left: 0px; margin-right: 100%; }
-  50% { margin-left: 25%; margin-right: 0%; }
-  100% { margin-left: 100%; margin-right: 0; }
+  0% {
+    margin-left: 0px;
+    margin-right: 100%;
+  }
+  50% {
+    margin-left: 25%;
+    margin-right: 0%;
+  }
+  100% {
+    margin-left: 100%;
+    margin-right: 0;
+  }
 }
 </style>

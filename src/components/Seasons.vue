@@ -1,5 +1,5 @@
 <template>
-  <div class="card" style="width: 18rem">
+  <div class="card">
     <div class="card-body">
       <h4 class="card-title">Temporades</h4>
 
@@ -56,13 +56,23 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.card-body {
+.card {
   width: 300px;
+}
+.card-body {
+  width: 100%;
   height: 720px;
   display: flex;
   justify-content: center;
   flex-direction: column;
 }
+
+@media (max-width: 720px) {
+  .card {
+    width: 200px;
+  }
+}
+
 
 ul {
   padding: 0px;
