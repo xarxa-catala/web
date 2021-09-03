@@ -2,7 +2,7 @@
   <div id="xc-app">
     <div class="wrapper">
       <nav
-        class="navbar sticky-top navbar-expand-lg navbar-light bg-light"
+        class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary"
         id="main-navbar"
       >
         <div class="container-fluid">
