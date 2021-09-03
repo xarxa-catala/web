@@ -74,7 +74,7 @@ export default {
   flex-direction: column;
 }
 
-@media (max-width: 720px) {
+@media (max-width: 640px) {
   .card {
     width: 200px;
   }
