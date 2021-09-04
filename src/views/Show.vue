@@ -4,13 +4,17 @@
     <h2 v-else>Selecciona una temporada i un episodi</h2>
     <div class="home">
       <div id="xc-video-container">
-      <img id="xc-video-placeholder" v-if="!isEpisodeSelected" src="../assets/player_placeholder.jpg" />
-      <VideoPlayer
-        :episodeSelected="episodeSelected"
-        :key="episodeSelected.id"
-        id="xc-video"
-        v-if="isEpisodeSelected"
-      />
+        <img
+          id="xc-video-placeholder"
+          v-if="!isEpisodeSelected"
+          src="../assets/player_placeholder.jpg"
+        />
+        <VideoPlayer
+          :episodeSelected="episodeSelected"
+          :key="episodeSelected.id"
+          id="xc-video"
+          v-if="isEpisodeSelected"
+        />
       </div>
       <div id="seasons-episodes">
         <Seasons @onSeasonSelected="onSeasonSelected" />
@@ -67,15 +71,19 @@ export default {
   justify-content: center;
 
   #xc-video-container {
-      width: 1280px;
-      height: 720px;
+    width: 1280px;
+    height: 720px;
 
-      #xc-video-placeholder, #xc-video {
-        width: 100%;
+    #xc-video-placeholder,
+    #xc-video {
+      width: 100%;
       height: 100%;
-      }
     }
-    
+
+    #xc-video-placeholder {
+      object-fit: cover;
+    }
+  }
 }
 
 #xc-show {

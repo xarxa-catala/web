@@ -1,7 +1,7 @@
 <template>
   <div class="xc-card card" style="width: 18rem">
     <a :href="linkUrl">
-      <img :src="imgUrl" class="xc-card-img card-img-top" alt="..." />
+      <img :src="getImage()" class="xc-card-img card-img-top" alt="..." />
       <div class="card-body">
         <h5 class="card-title">{{ title }}</h5>
         <p class="card-text">
@@ -22,6 +22,11 @@ export default {
   mounted() {
     console.log(this.title);
   },
+  methods: {
+    getImage() {
+      return require(`../assets/${this.imgUrl}`);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
