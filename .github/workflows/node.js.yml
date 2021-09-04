@@ -40,8 +40,8 @@ jobs:
           known_hosts: ${{ secrets.SSH_MULTIMEDIA_KNOWN_HOST }}
           config: |
             Host multimedia
-            Port ${{ secrets.SSH_MULTIMEDIA_PORT }}
             HostName ${{ secrets.SSH_MULTIMEDIA_HOST }}
+            Port ${{ secrets.SSH_MULTIMEDIA_PORT }}
             User ${{ secrets.SSH_MULTIMEDIA_USER }}
             IdentityFile ~/.ssh/id_rsa-multimedia
       - name: Extract branch name
