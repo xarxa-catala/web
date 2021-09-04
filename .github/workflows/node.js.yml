@@ -32,6 +32,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: dist
+          path: dist
       - name: Install SSH key
         uses: shimataro/ssh-key-action@v2
         with:
