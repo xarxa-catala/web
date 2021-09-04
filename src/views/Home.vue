@@ -8,7 +8,7 @@
         title="Aplicació Android"
         linkUrl="https://t.me/onepiececatala/101821"
       >
-        Descarrega't l'app de One Piece Català i visualitza el contingut de
+        Descarrega't l'app de Xarxa Català i visualitza el contingut de
         forma nativa al teu dispositiu Android.
       </ImageCard>
 
