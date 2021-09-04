@@ -36,10 +36,17 @@ jobs:
         uses: shimataro/ssh-key-action@v2
         with:
           key: ${{ secrets.SSH_MULTIMEDIA_KEY }}
+          name: id_rsa-multimedia
           known_hosts: ${{ secrets.SSH_MULTIMEDIA_KNOWN_HOST }}
+          config: |
+            Host multimedia
+            Port ${{ secrets.SSH_MULTIMEDIA_PORT }}
+            HostName ${{ secrets.SSH_MULTIMEDIA_HOST }}
+            User ${{ secrets.SSH_MULTIMEDIA_USER }}
+            IdentityFile ~/.ssh/id_rsa-multimedia
       - name: Extract branch name
         shell: bash
         run: echo "##[set-output name=branch;]$(echo ${GITHUB_REF#refs/heads/})"
         id: extract_branch
       - name: Deploy with rsync
-        run: rsync -avz -e 'ssh -p ${{ secrets.SSH_MULTIMEDIA_PORT }}' ./dist/ ${{ secrets.SSH_MULTIMEDIA_USER }}@${{ secrets.SSH_MULTIMEDIA_HOST }}:/home/${{ secrets.SSH_MULTIMEDIA_USER }}/${{ steps.extract_branch.outputs.branch }}/
+        run: rsync -avz ./dist/ multimedia:/home/${{ secrets.SSH_MULTIMEDIA_USER }}/${{ steps.extract_branch.outputs.branch }}/
