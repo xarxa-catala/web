@@ -3,6 +3,14 @@
     <img src="../assets/logo.png" />
     <h4 id="xc-welcome-msg">Benvinguts a One Piece Català</h4>
     <div id="xc-cards-container">
+
+      <ImageCard
+        imgUrl="op-card.webp"
+        title="Anime Online"
+        linkUrl="show-online"
+      >
+        Clica aquí per veure online tots els episodis que hi ha doblats al català.
+      </ImageCard>
       <ImageCard
         imgUrl="android-logo.webp"
         title="Aplicació Android"
