@@ -1,102 +1,96 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Temporades</h4>
-
-      <ul>
-        <li
-          class="list-group-item"
-          :class="{ active: isSeasonSelected(item) }"
-          v-for="item in items"
-          :key="item.id"
-          v-on:click="onSeasonSelected(item)"
-        >
-          {{ item.nom }}
-        </li>
-      </ul>
-    </div>
-  </div>
+  <ul class="seasons">
+    <template v-for="season in seasons" :key="season.id">
+      <li
+        class="season"
+        v-if="season.id != 2"
+        v-on:click="onSeasonSelected(season)"
+      >
+        <div class="season-title">
+          <h5 class="m-0">{{ transformTitle(season.nom) }}</h5>
+        </div>
+        <div class="season-image" v-bind:style="{ backgroundImage: 'url(' + getCover(season.id) + ')' }">
+        </div>
+      </li>
+    </template>
+  </ul>
 </template>
 
 <script>
-import axios from "axios";
+import seasonsToVolumes from '../assets/maps/seasons_to_volumes.json';
+import moviesToCovers from '../assets/maps/movies_to_covers.json';
 
 export default {
   name: "Seasons",
+  props: {
+    seasons: [],
+    areMovies: Boolean,
+  },
   data() {
     return {
       items: null,
       selectedSeasonId: -1,
     };
   },
-  mounted() {
-    axios
-      .get(
-        "https://gestio.multimedia.xarxacatala.cat/api/v1/shows/4/playlists/"
-      )
-      .then((response) => {
-        const playlists = response.data;
-        const sortedPlaylists = playlists.sort((a, b) => a.nom.localeCompare(b.nom));
-        this.items = sortedPlaylists;
-        console.log("sortedPlaylists:");
-        console.log(sortedPlaylists);
-      });
-  },
   methods: {
     onSeasonSelected(season) {
-      console.log(season.nom);
       this.selectedSeasonId = season.id;
-      this.$emit("onSeasonSelected", season);
+      this.$emit("onSeasonSelected", season, this.areMovies);
     },
-    isSeasonSelected(season) {
-      return season.id === this.selectedSeasonId;
+    getCover(id) {
+      return this.areMovies ? this.getMovieCover(id) : this.getSeasonVolume(id);
+    },
+    getSeasonVolume(seasonId) {
+      return seasonsToVolumes[seasonId];
+    },
+    getMovieCover(movieId) {
+      return moviesToCovers[movieId];
+    },
+    transformTitle(title) {
+      return this.areMovies ? title : title.substr(6);
     },
   },
 };
 </script>
 
 <style lang="scss" scoped>
-.card {
-  width: 300px;
-}
-.card-body {
-  width: 100%;
-  height: 720px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-@media (max-width: 640px) {
-  .card {
-    width: 200px;
-  }
-}
-
-
-ul {
+.seasons {
   padding: 0px;
   margin: 0px;
-  overflow: hidden;
-  overflow-y: scroll;
   list-style-type: none;
-  flex-grow: 2;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-li {
-  height: 64px;
-  display: flex;
-  flex-direction: row;
-  align-content: flex-start;
-  align-items: center;
-  text-align: start;
+.season {
+  width: 256px;
+  margin-bottom: 16px;
+  padding: 0 8px;
+  text-align: center;
   cursor: pointer;
-}
 
-.card-header {
-  padding-left: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  &-title {
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  &-image {
+    display: flex;
+    align-items: center;
+    background-size: contain;
+    background-repeat: no-repeat;
+    padding-top: 158%;
+  }
+
+  @media (max-width: 992px) {
+    width: 128px;
+    flex-grow: 1;
+
+    &-title {
+      height: 92px;
+    }
+  }
 }
 </style>
