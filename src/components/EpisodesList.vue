@@ -1,33 +1,24 @@
 <template>
-  <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Episodis</h4>
-      <div v-if="loading" class="progress-line"></div>
-
-      <ul>
-        <li
-          class="list-group-item"
-          :class="{ active: isEpisodeSelected(item) }"
-          v-for="item in items"
-          :key="item.id"
-          v-on:click="onEpisodeSelected(item)"
-        >
-          {{ item.nom }}
-        </li>
-      </ul>
-    </div>
-  </div>
+  <div v-if="loading" class="progress-line"></div>
+  <ul>
+    <li
+      :class="{ active: isEpisodeSelected(item) }"
+      v-for="item in items"
+      :key="item.id"
+      v-on:click="onEpisodeSelected(item)"
+    >
+      {{ item.nom }}
+    </li>
+  </ul>
 </template>
 
 <script>
-//import * as Vue from 'vue' // in Vue 3
 import axios from "axios";
-//import VueAxios from 'vue-axios'
 
 export default {
   name: "EpisodesList",
   props: {
-    seasonId: Number,
+    season: Object,
   },
   data() {
     return {
@@ -37,25 +28,20 @@ export default {
     };
   },
   mounted() {
-    console.log("Mounting EpisodesList with seasonId " + this.seasonId);
-
     axios
       .get(
-        `https://gestio.multimedia.xarxacatala.cat/api/v1/shows/4/playlists/${this.seasonId}/videos/`
+        `https://gestio.multimedia.xarxacatala.cat/api/v1/shows/4/playlists/${this.season.id}/videos/`
       )
       .then((response) => {
         this.loading = false;
         this.items = response.data;
-        console.log(response.data);
       });
   },
   methods: {
     onEpisodeSelected(episode) {
-      console.log(episode.nom);
       this.episodeSelectedId = episode.id;
       this.$emit("onEpisodeSelected", episode);
     },
-
     isEpisodeSelected(episode) {
       return episode.id === this.episodeSelectedId;
     },
@@ -63,23 +49,6 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
-.card {
-  width: 300px;
-}
-.card-body {
-  width: 100%;
-  height: 720px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-}
-
-@media (max-width: 640px) {
-  .card {
-    width: 200px;
-  }
-}
-
 ul {
   padding-left: 0px;
   padding-top: 0px;
@@ -87,24 +56,19 @@ ul {
   overflow: hidden;
   overflow-y: scroll;
   list-style-type: none;
-  flex-grow: 2;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
 li {
-  height: 64px;
-  display: flex;
-  flex-direction: row;
-  align-content: flex-start;
-  align-items: center;
-  text-align: start;
+  box-sizing: content-box;
+  width: fit-content;
+  height: 24px;
+  padding: 4px 8px;
+  background-color: #151515;
+  border-radius: 0.25rem;
   cursor: pointer;
-}
-
-.card-header {
-  padding-left: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .progress-line,
