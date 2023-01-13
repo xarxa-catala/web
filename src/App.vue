@@ -38,7 +38,7 @@
               <li>
                 <a
                   class="nav-link"
-                  href="https://llunaplenanofansub.blogspot.com/1997/07/manga-una-peca.html"
+                  href="https://mega.nz/folder/Od4X0YTB#hSQjtzlpz392MsXYE8AnIg"
                   >Manga</a
                 >
               </li>
