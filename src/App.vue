@@ -35,12 +35,15 @@
                   >Qui som?</a
                 >
               </li>
-              <li>
-                <a
-                  class="nav-link"
-                  href="https://mega.nz/folder/Od4X0YTB#hSQjtzlpz392MsXYE8AnIg"
-                  >Manga</a
-                >
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  Manga
+                </a>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                  <li><a class="dropdown-item" target="_blank" href="https://mega.nz/folder/Od4X0YTB#hSQjtzlpz392MsXYE8AnIg">Capítols</a></li>
+                  <li><a class="dropdown-item" target="_blank" href="https://mega.nz/folder/HNYnALBJ#Rt-t-4n_5PAntz79kbpOnA">Volums</a></li>
+                  <li><a class="dropdown-item" target="_blank" href="https://lectortmo.com/library/manga/126/one-piece-catala">TuMangaOnline</a></li>
+                </ul>
               </li>
             </ul>
           </div>
