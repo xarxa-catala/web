@@ -86,20 +86,17 @@ export default {
     };
   },
   watch: {
-    $route(to, from) {
-      console.log(`navigating from ${from.fullPath} to ${to.fullPath}`);
+    $route(to) {
       this.currentPage = to.fullPath;
     },
   },
 
   methods: {
     navigateTo(destination) {
-      console.log(`Navigating to ${destination}`);
       this.$router.push(destination);
     },
     isCurrentPage(page) {
       var isCurrentPage = this.currentPage === page;
-      console.log(`Is current page ${page}? ${isCurrentPage}`);
 
       return isCurrentPage;
     },
@@ -113,7 +110,7 @@ $footer-height: 75px;
 
 html,
 body {
-  height: 100%;
+  height: 99.9%; // No clue why "100%"" takes "101%"
   width: 100%;
 }
 

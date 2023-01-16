@@ -20,7 +20,6 @@ export default {
     linkUrl: String,
   },
   mounted() {
-    console.log(this.title);
   },
   methods: {
     getImage() {

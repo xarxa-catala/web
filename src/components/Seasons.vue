@@ -38,8 +38,6 @@ export default {
         const playlists = response.data;
         const sortedPlaylists = playlists.sort((a, b) => a.nom.localeCompare(b.nom));
         this.items = sortedPlaylists;
-        console.log("sortedPlaylists:");
-        console.log(sortedPlaylists);
       });
   },
   methods: {

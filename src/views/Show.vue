@@ -50,12 +50,10 @@ export default {
   },
   methods: {
     onSeasonSelected(season) {
-      console.log("SHOW Selected season " + season.nom);
       this.selectedSeasonId = season.id;
     },
 
     onEpisodeSelected(episode) {
-      console.log("SHOW Selected episode " + episode.nom);
       this.episodeSelected = episode;
       this.isEpisodeSelected = true;
     },

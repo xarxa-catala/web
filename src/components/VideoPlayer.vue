@@ -8,7 +8,7 @@
 import VideoJsPlayer from "@/components/VideoJsPlayer.vue";
 
 export default {
-  name: "VideoExample",
+  name: "Show",
   components: {
     VideoJsPlayer,
   },
@@ -30,7 +30,6 @@ export default {
     episodeSelected: {url: ""}
   },
   mount() {
-    console.log("Episode URL is " + this.episodeSelected.url)
   },
 };
 </script>

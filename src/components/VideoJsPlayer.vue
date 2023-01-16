@@ -4,7 +4,6 @@
 
 <script>
 import "video.js/dist/video-js.css";
-//import '@videojs/themes/dist/city/index.css';
 
 import videojs from 'video.js';
 
@@ -25,7 +24,6 @@ export default {
     },
     mounted() {
         this.player = videojs(this.$refs.videoPlayer, this.options, function onPlayerReady() {
-            console.log('onPlayerReady', this);
         })
     },
     beforeUnmount() {

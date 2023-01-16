@@ -20,9 +20,8 @@
 </template>
 
 <script>
-//import * as Vue from 'vue' // in Vue 3
+
 import axios from "axios";
-//import VueAxios from 'vue-axios'
 
 export default {
   name: "EpisodesList",
@@ -37,7 +36,6 @@ export default {
     };
   },
   mounted() {
-    console.log("Mounting EpisodesList with seasonId " + this.seasonId);
 
     axios
       .get(
@@ -46,12 +44,10 @@ export default {
       .then((response) => {
         this.loading = false;
         this.items = response.data;
-        console.log(response.data);
       });
   },
   methods: {
     onEpisodeSelected(episode) {
-      console.log(episode.nom);
       this.episodeSelectedId = episode.id;
       this.$emit("onEpisodeSelected", episode);
     },
