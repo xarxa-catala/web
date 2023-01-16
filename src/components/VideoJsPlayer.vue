@@ -1,10 +1,10 @@
 <template>
-        <video ref="videoPlayer" class="video-js vjs-theme-city"></video>
+        <video ref="videoPlayer" class="video-js"></video>
 </template>
 
 <script>
 import "video.js/dist/video-js.css";
-import '@videojs/themes/dist/city/index.css';
+//import '@videojs/themes/dist/city/index.css';
 
 import videojs from 'video.js';
 
