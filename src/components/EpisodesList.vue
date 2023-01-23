@@ -67,12 +67,10 @@ export default {
     },
 
     markWatched(episode) {
-      console.log(`${this.seasonId}-${episode.id}`, 'watched')
       Cookies.set(`${this.seasonId}-${episode.id}`, 'watched')
     },
     
     markUnWatched(episode) {
-      console.log(`${this.seasonId}-${episode.id}`, 'unwatched')
       Cookies.remove(`${this.seasonId}-${episode.id}`)
     },
 
