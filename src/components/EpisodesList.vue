@@ -20,7 +20,7 @@
 
           <div
             class="watched-button"
-            :class="{ watched: isWatched(item) }"
+            :class="{ watched: isWatched(item), reload: this.reloadWatched }"
             v-on:click="switchWatched(item)"
           >
             👁️
@@ -46,6 +46,7 @@ export default {
       loading: true,
       items: null,
       episodeSelectedId: -1,
+      reloadWatched: false,
     };
   },
   mounted() {
@@ -61,7 +62,8 @@ export default {
   },
   methods: {
     switchWatched(episode) {
-      return this.isWatched(episode) ? this.markUnWatched(episode) : this.markWatched(episode)
+      this.isWatched(episode) ? this.markUnWatched(episode) : this.markWatched(episode)
+      this.reloadWatched = !this.reloadWatched // trick to reload watched property
     },
 
     markWatched(episode) {
