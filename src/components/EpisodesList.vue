@@ -23,7 +23,7 @@
             :class="{ watched: isWatched(item), reload: this.reloadWatched }"
             v-on:click="switchWatched(item)"
           >
-            👁️
+            <v-icon name="bi-eye-fill" />
           </div>
         </li>
       </ul>
@@ -34,7 +34,8 @@
 <script>
 
 import axios from "axios";
-import Cookies from 'js-cookie' 
+import Cookies from 'js-cookie';
+import OhVueIcon from "oh-vue-icons"; 
 
 export default {
   name: "EpisodesList",
@@ -89,6 +90,9 @@ export default {
       return episode.id === this.episodeSelectedId;
     },
   },
+  components: {
+    "v-icon": OhVueIcon
+  }
 };
 </script>
 <style lang="scss" scoped>
