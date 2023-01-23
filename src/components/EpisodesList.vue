@@ -10,9 +10,21 @@
           :class="{ active: isEpisodeSelected(item) }"
           v-for="item in items"
           :key="item.id"
-          v-on:click="onEpisodeSelected(item)"
         >
-          {{ item.nom }}
+          <div
+            class="episode-name"
+            v-on:click="onEpisodeSelected(item)"
+          >
+            {{ item.nom }}
+          </div>
+
+          <div
+            class="watched-button"
+            :class="{ watched: isWatched(item) }"
+            v-on:click="switchWatched(item)"
+          >
+            👁️
+          </div>
         </li>
       </ul>
     </div>
@@ -22,6 +34,7 @@
 <script>
 
 import axios from "axios";
+import Cookies from 'js-cookie' 
 
 export default {
   name: "EpisodesList",
@@ -47,9 +60,29 @@ export default {
       });
   },
   methods: {
+    switchWatched(episode) {
+      return this.isWatched(episode) ? this.markUnWatched(episode) : this.markWatched(episode)
+    },
+
+    markWatched(episode) {
+      console.log(`${this.seasonId}-${episode.id}`, 'watched')
+      Cookies.set(`${this.seasonId}-${episode.id}`, 'watched')
+    },
+    
+    markUnWatched(episode) {
+      console.log(`${this.seasonId}-${episode.id}`, 'unwatched')
+      Cookies.remove(`${this.seasonId}-${episode.id}`)
+    },
+
+    isWatched(episode) {
+      const cookie = Cookies.get(`${this.seasonId}-${episode.id}`)
+      return cookie === 'watched'
+    },
+
     onEpisodeSelected(episode) {
       this.episodeSelectedId = episode.id;
       this.$emit("onEpisodeSelected", episode);
+      this.markWatched(episode)
     },
 
     isEpisodeSelected(episode) {
@@ -147,5 +180,26 @@ li {
     margin-left: 100%;
     margin-right: 0;
   }
+}
+
+.list-group-item {
+  display: flex;
+  justify-content: space-around;
+}
+
+.episode-name {
+  flex: 3;
+  text-align: center;
+}
+
+.watched-button {
+  flex: 1;
+  text-align: center;
+
+  opacity: 0;
+}
+
+.watched-button.watched {
+  opacity: 1;
 }
 </style>
