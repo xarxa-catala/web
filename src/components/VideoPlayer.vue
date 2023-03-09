@@ -1,37 +1,24 @@
 <template>
   <div>
-    <video-js-player id="main-video-player" :options="videoOptions" />
+    <!-- <VideoJsPlayer id="main-video-player" :options="videoOptions" /> -->
+    <video id="main-video-player" controls autoplay>
+        <source class="video-js" :src="videoOptions.src" :type="videoOptions.type" />
+        Your browser does not support the video tag.
+    </video>
   </div>
 </template>
 
-<script>
-import VideoJsPlayer from "@/components/VideoJsPlayer.vue";
+<script setup lang="ts">
+import { ref } from "vue";
+import { Episode } from "../models/Episode";
+import { VideoOptions } from "../models/VideoOptions";
 
-export default {
-  name: "Show",
-  components: {
-    VideoJsPlayer,
-  },
-  data() {
-    return {
-      videoOptions: {
-        autoplay: true,
-        controls: true,
-        sources: [
-          {
-            src: this.episodeSelected.url,
-            type: "video/mp4",
-          },
-        ],
-      },
-    };
-  },
-  props: {
-    episodeSelected: {url: ""}
-  },
-  mount() {
-  },
-};
+const props = defineProps<{ episodeSelected: Episode }>()
+
+const videoOptions =  ref<VideoOptions>({
+  src: props.episodeSelected.url,
+  type: "video/mp4",
+});
 </script>
 
 <style lang="scss" scoped>

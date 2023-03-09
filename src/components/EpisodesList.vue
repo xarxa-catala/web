@@ -5,13 +5,8 @@
       <div v-if="loading" class="progress-line"></div>
 
       <ul>
-        <li
-          class="list-group-item"
-          :class="{ active: isEpisodeSelected(item) }"
-          v-for="item in items"
-          :key="item.id"
-          v-on:click="onEpisodeSelected(item)"
-        >
+        <li class="list-group-item" :class="{ active: isEpisodeSelected(item) }" v-for="item in items" :key="item.id"
+          v-on:click="onEpisodeSelected(item)">
           {{ item.nom }}
         </li>
       </ul>
@@ -19,49 +14,48 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 
 import axios from "axios";
+import { Episode } from "../models/Episode";
+import { onMounted, ref } from "vue";
 
-export default {
-  name: "EpisodesList",
-  props: {
-    seasonId: Number,
-  },
-  data() {
-    return {
-      loading: true,
-      items: null,
-      episodeSelectedId: -1,
-    };
-  },
-  mounted() {
+const props = defineProps<{ seasonId: number }>()
+const events = defineEmits<{ (e: 'onEpisodeSelected', episodeid: Episode): void }>()
+const loading = ref(true)
+const items = ref<Episode[]>([])
+const episodeSelectedId = ref(-1)
 
-    axios
-      .get(
-        `https://gestio.multimedia.xarxacatala.cat/api/v1/shows/4/playlists/${this.seasonId}/videos/`
-      )
-      .then((response) => {
-        this.loading = false;
-        this.items = response.data;
-      });
-  },
-  methods: {
-    onEpisodeSelected(episode) {
-      this.episodeSelectedId = episode.id;
-      this.$emit("onEpisodeSelected", episode);
-    },
+onMounted(() => {
+  loadEpisodes()
+})
 
-    isEpisodeSelected(episode) {
-      return episode.id === this.episodeSelectedId;
-    },
-  },
-};
+function loadEpisodes() {
+  axios
+    .get(
+      `https://gestio.multimedia.xarxacatala.cat/api/v1/shows/4/playlists/${props.seasonId}/videos/`
+    )
+    .then((response) => {
+      loading.value = false;
+      items.value = response.data;
+    });
+}
+
+function onEpisodeSelected(episode: Episode) {
+  episodeSelectedId.value = episode.id;
+  events("onEpisodeSelected", episode)
+}
+
+function isEpisodeSelected(episode: Episode) {
+  return episode.id === episodeSelectedId.value;
+}
+
 </script>
 <style lang="scss" scoped>
 .card {
   width: 300px;
 }
+
 .card-body {
   width: 100%;
   height: 720px;
@@ -109,40 +103,48 @@ li {
   width: 100%;
   margin: 0;
 }
+
 .progress-line {
   background-color: #b3d4fc;
   display: -webkit-flex;
   display: flex;
 }
+
 .progress-line:before {
   background-color: #3f51b5;
   content: "";
   -webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
 }
+
 @-webkit-keyframes running-progress {
   0% {
     margin-left: 0px;
     margin-right: 100%;
   }
+
   50% {
     margin-left: 25%;
     margin-right: 0%;
   }
+
   100% {
     margin-left: 100%;
     margin-right: 0;
   }
 }
+
 @keyframes running-progress {
   0% {
     margin-left: 0px;
     margin-right: 100%;
   }
+
   50% {
     margin-left: 25%;
     margin-right: 0%;
   }
+
   100% {
     margin-left: 100%;
     margin-right: 0;

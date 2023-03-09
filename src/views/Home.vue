@@ -5,14 +5,14 @@
     <div id="xc-cards-container">
 
       <ImageCard
-        imgUrl="op-card.webp"
+        imgUrl="src/assets/op-card.webp"
         title="Anime Online"
         linkUrl="show-online"
       >
         Clica aquí per veure online tots els episodis que hi ha doblats al català.
       </ImageCard>
       <ImageCard
-        imgUrl="android-logo.webp"
+        imgUrl="src/assets/android-logo.webp"
         title="Aplicació Android"
         linkUrl="https://t.me/onepiececatala/101821"
       >
@@ -21,7 +21,7 @@
       </ImageCard>
 
       <ImageCard
-        imgUrl="telegram-logo.webp"
+        imgUrl="src/assets/telegram-logo.webp"
         title="Grup de Telegram"
         linkUrl="https://t.me/onepiececatala/"
       >
@@ -30,7 +30,7 @@
       </ImageCard>
 
       <ImageCard
-        imgUrl="xc-logo.webp"
+        imgUrl="src/assets/xc-logo.webp"
         title="Xarxa Catala"
         linkUrl="https://xarxacatala.cat"
       >
@@ -41,19 +41,9 @@
   </div>
 </template>
 
-<script>
-import ImageCard from "@/components/ImageCard.vue";
+<script setup lang="ts">
+import ImageCard from '../components/ImageCard.vue';
 
-export default {
-  name: "Home",
-  components: {
-    ImageCard,
-  },
-  data() {
-    return {};
-  },
-  methods: {},
-};
 </script>
 
 

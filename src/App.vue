@@ -1,48 +1,34 @@
 <template>
   <div id="xc-app">
     <div class="wrapper">
-      <nav
-        class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary"
-        id="main-navbar"
-      >
+      <nav class="navbar sticky-top navbar-expand-lg navbar-dark bg-primary" id="main-navbar">
         <div class="container-fluid">
-          <a class="navbar-brand nav-item" @click="navigateTo('/')"
-            >One Piece Català</a
-          >
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNavDropdown"
-            aria-controls="navbarNavDropdown"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
+          <a class="navbar-brand nav-item" @click="navigateTo('/')">One Piece Català</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+            aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item" @click="navigateTo('/show-online')">
-                <a
-                  class="nav-link"
-                  :class="{ active: isCurrentPage('/show-online') }"
-                  aria-current="page"
-                  >Anime Online</a
-                >
+                <a class="nav-link" :class="{ active: isCurrentPage('/show-online') }" aria-current="page">Anime
+                  Online</a>
               </li>
               <li class="nav-item" @click="navigateTo('/about')">
-                <a class="nav-link" :class="{ active: isCurrentPage('/about') }"
-                  >Qui som?</a
-                >
+                <a class="nav-link" :class="{ active: isCurrentPage('/about') }">Qui som?</a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDarkDropdownMenuLink" role="button"
+                  data-bs-toggle="dropdown" aria-expanded="false">
                   Manga
                 </a>
                 <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
-                  <li><a class="dropdown-item" target="_blank" href="https://mega.nz/folder/Od4X0YTB#hSQjtzlpz392MsXYE8AnIg">Capítols</a></li>
-                  <li><a class="dropdown-item" target="_blank" href="https://mega.nz/folder/HNYnALBJ#Rt-t-4n_5PAntz79kbpOnA">Volums</a></li>
-                  <li><a class="dropdown-item" target="_blank" href="https://lectortmo.com/library/manga/126/one-piece-catala">TuMangaOnline</a></li>
+                  <li><a class="dropdown-item" target="_blank"
+                      href="https://mega.nz/folder/Od4X0YTB#hSQjtzlpz392MsXYE8AnIg">Capítols</a></li>
+                  <li><a class="dropdown-item" target="_blank"
+                      href="https://mega.nz/folder/HNYnALBJ#Rt-t-4n_5PAntz79kbpOnA">Volums</a></li>
+                  <li><a class="dropdown-item" target="_blank"
+                      href="https://lectortmo.com/library/manga/126/one-piece-catala">TuMangaOnline</a></li>
                 </ul>
               </li>
             </ul>
@@ -59,49 +45,36 @@
           <div id="xc-footer-title">Xarxa Català</div>
         </a>
         <div class="spacer" />
-        <a href="https://t.me/onepiececatala"
-          ><i class="xc-social-icon bi bi-telegram"></i
-        ></a>
-        <a href="https://twitter.com/CatalaOnePiece"
-          ><i class="xc-social-icon bi bi-twitter"></i
-        ></a>
-        <a href="https://www.instagram.com/catonepiece/"
-          ><i class="xc-social-icon bi bi-instagram"></i
-        ></a>
-        <a href="https://www.facebook.com/onepiececatala"
-          ><i class="xc-social-icon bi bi-facebook"></i
-        ></a>
+        <a href="https://t.me/onepiececatala"><i class="xc-social-icon bi bi-telegram"></i></a>
+        <a href="https://twitter.com/CatalaOnePiece"><i class="xc-social-icon bi bi-twitter"></i></a>
+        <a href="https://www.instagram.com/catonepiece/"><i class="xc-social-icon bi bi-instagram"></i></a>
+        <a href="https://www.facebook.com/onepiececatala"><i class="xc-social-icon bi bi-facebook"></i></a>
       </div>
     </footer>
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import "bootstrap-icons/font/bootstrap-icons.css";
+import { ref } from "vue";
+import router from "./router";
+import ImageCard from './components/ImageCard.vue'
 
-export default {
-  data() {
-    return {
-      currentPage: "/",
-    };
-  },
-  watch: {
-    $route(to) {
-      this.currentPage = to.fullPath;
-    },
-  },
+const currentPage = ref("/",)
 
-  methods: {
-    navigateTo(destination) {
-      this.$router.push(destination);
-    },
-    isCurrentPage(page) {
-      var isCurrentPage = this.currentPage === page;
+window.addEventListener('hashchange', () => {
+  currentPage.value = window.location.hash
+})
 
-      return isCurrentPage;
-    },
-  },
-};
+function navigateTo(destination: string) {
+  router.push(destination);
+}
+
+function isCurrentPage(page: string) {
+  var isCurrentPage = currentPage.value === page;
+
+  return isCurrentPage;
+}
 </script>
 
 
@@ -153,6 +126,7 @@ body {
   /* But also accounting for potential margin-bottom of last child */
   margin-bottom: -$footer-height;
 }
+
 .footer,
 .push {
   height: $footer-height;
@@ -163,9 +137,11 @@ body {
   height: 100%;
   display: flex;
   align-items: center;
+
   .spacer {
     flex-grow: 4;
   }
+
   .xc-social-icon {
     font-size: 2rem;
     margin-left: 8px;

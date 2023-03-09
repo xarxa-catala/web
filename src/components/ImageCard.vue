@@ -1,7 +1,7 @@
 <template>
   <div class="xc-card card" style="width: 18rem">
     <a :href="linkUrl">
-      <img :src="getImage()" class="xc-card-img card-img-top" alt="..." />
+      <img :src="imgUrl" class="xc-card-img card-img-top" alt="..." />
       <div class="card-body">
         <h5 class="card-title">{{ title }}</h5>
         <p class="card-text">
@@ -11,22 +11,10 @@
     </a>
   </div>
 </template>
-<script>
-export default {
-  name: "ImageCard",
-  props: {
-    imgUrl: String,
-    title: String,
-    linkUrl: String,
-  },
-  mounted() {
-  },
-  methods: {
-    getImage() {
-      return require(`../assets/${this.imgUrl}`);
-    }
-  }
-};
+
+<script setup lang="ts">
+defineProps<{ imgUrl: string, title: string, linkUrl: string }>()
+
 </script>
 <style lang="scss" scoped>
 .xc-card:hover {
