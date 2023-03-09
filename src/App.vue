@@ -31,6 +31,9 @@
                       href="https://lectortmo.com/library/manga/126/one-piece-catala">TuMangaOnline</a></li>
                 </ul>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="http://lillapunteria.carrd.co">L'illa Punteria</a>
+              </li>
             </ul>
           </div>
         </div>
