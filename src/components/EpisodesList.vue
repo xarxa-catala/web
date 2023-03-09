@@ -1,13 +1,13 @@
 <template>
   <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Episodis</h4>
+    <div class="xc-card-body">
+      <h4 class="xc-card-title">Episodis</h4>
       <div v-if="loading" class="progress-line"></div>
 
       <ul>
-        <li class="list-group-item" :class="{ active: isEpisodeSelected(item) }" v-for="item in items" :key="item.id"
-          v-on:click="onEpisodeSelected(item)">
-          {{ item.nom }}
+        <li :class="{ active: isEpisodeSelected(episode) }" v-for="episode in episodes" :key="episode.id"
+          v-on:click="onEpisodeSelected(episode)">
+          {{ episode.nom }}
         </li>
       </ul>
     </div>
@@ -23,7 +23,7 @@ import { onMounted, ref } from "vue";
 const props = defineProps<{ seasonId: number }>()
 const events = defineEmits<{ (e: 'onEpisodeSelected', episodeid: Episode): void }>()
 const loading = ref(true)
-const items = ref<Episode[]>([])
+const episodes = ref<Episode[]>([])
 const episodeSelectedId = ref(-1)
 
 onMounted(() => {
@@ -37,7 +37,7 @@ function loadEpisodes() {
     )
     .then((response) => {
       loading.value = false;
-      items.value = response.data;
+      episodes.value = response.data;
     });
 }
 
@@ -54,14 +54,6 @@ function isEpisodeSelected(episode: Episode) {
 <style lang="scss" scoped>
 .card {
   width: 300px;
-}
-
-.card-body {
-  width: 100%;
-  height: 720px;
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
 }
 
 @media (max-width: 640px) {
@@ -81,20 +73,27 @@ ul {
 }
 
 li {
-  height: 64px;
+  height: 56px;
   display: flex;
   flex-direction: row;
   align-content: flex-start;
   align-items: center;
   text-align: start;
   cursor: pointer;
+  padding: 16px;
 }
 
-.card-header {
-  padding-left: 24px;
+
+.xc-card-title {
+  padding: 8px;
+}
+
+.xc-card-body {
+  width: 100%;
+  height: 720px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 
 .progress-line,
@@ -115,6 +114,11 @@ li {
   content: "";
   -webkit-animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
   animation: running-progress 2s cubic-bezier(0.4, 0, 0.2, 1) infinite;
+}
+
+.active {
+  background-color: rgb(13, 110, 253);
+  color: white;
 }
 
 @-webkit-keyframes running-progress {

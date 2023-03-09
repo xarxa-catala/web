@@ -1,63 +1,57 @@
 <template>
   <div class="card">
-    <div class="card-body">
-      <h4 class="card-title">Temporades</h4>
+    <div class="xc-card-body">
+      <h4 class="xc-card-title">Temporades</h4>
 
       <ul>
-        <li
-          class="list-group-item"
-          :class="{ active: isSeasonSelected(item) }"
-          v-for="item in items"
-          :key="item.id"
-          v-on:click="onSeasonSelected(item)"
-        >
-          {{ item.nom }}
+        <li v-for="season in seasons" :class="{ active: selectedSeasonId == season.id }" :key="season.id"
+          v-on:click="onSeasonSelected(season)">
+          {{ season.nom }}
         </li>
       </ul>
     </div>
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
 import axios from "axios";
+import { onMounted, ref } from "vue";
+import { Season } from "../models/Season";
 
-export default {
-  name: "Seasons",
-  data() {
-    return {
-      items: null,
-      selectedSeasonId: -1,
-    };
-  },
-  mounted() {
-    axios
-      .get(
-        "https://gestio.multimedia.xarxacatala.cat/api/v1/shows/4/playlists/"
-      )
-      .then((response) => {
-        const playlists = response.data;
-        const sortedPlaylists = playlists.sort((a, b) => a.nom.localeCompare(b.nom));
-        this.items = sortedPlaylists;
-      });
-  },
-  methods: {
-    onSeasonSelected(season) {
-      console.log(season.nom);
-      this.selectedSeasonId = season.id;
-      this.$emit("onSeasonSelected", season);
-    },
-    isSeasonSelected(season) {
-      return season.id === this.selectedSeasonId;
-    },
-  },
-};
+const events = defineEmits<{ (e: 'onSeasonSelected', season: Season): void }>()
+
+const seasons = ref<Season[]>([])
+const selectedSeasonId = ref(-1)
+
+onMounted(() => {
+  axios
+    .get(
+      "https://gestio.multimedia.xarxacatala.cat/api/v1/shows/4/playlists/"
+    )
+    .then((response) => {
+      const playlists: Season[] = response.data;
+      const sortedPlaylists = playlists.sort((a, b) => a.nom.localeCompare(b.nom));
+      seasons.value = sortedPlaylists;
+    });
+})
+
+function onSeasonSelected(season: Season) {
+  selectedSeasonId.value = season.id;
+  events("onSeasonSelected", season);
+}
+
 </script>
 
 <style lang="scss" scoped>
 .card {
   width: 300px;
 }
-.card-body {
+
+.xc-card-title {
+  padding: 8px;
+}
+
+.xc-card-body {
   width: 100%;
   height: 720px;
   display: flex;
@@ -82,19 +76,18 @@ ul {
 }
 
 li {
-  height: 64px;
+  height: 56px;
   display: flex;
   flex-direction: row;
   align-content: flex-start;
   align-items: center;
   text-align: start;
   cursor: pointer;
+  padding: 16px;
 }
 
-.card-header {
-  padding-left: 24px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.active {
+  background-color: rgb(13, 110, 253);
+  color: white;
 }
 </style>
