@@ -5,14 +5,14 @@
     <div id="xc-cards-container">
 
       <ImageCard
-        imgUrl="src/assets/op-card.webp"
+        imgUrl="../assets/op-card.webp"
         title="Anime Online"
         linkUrl="show-online"
       >
         Clica aquí per veure online tots els episodis que hi ha doblats al català.
       </ImageCard>
       <ImageCard
-        imgUrl="src/assets/android-logo.webp"
+        imgUrl="../assets/android-logo.webp"
         title="Aplicació Android"
         linkUrl="https://t.me/onepiececatala/101821"
       >
@@ -21,7 +21,7 @@
       </ImageCard>
 
       <ImageCard
-        imgUrl="src/assets/telegram-logo.webp"
+        imgUrl="../assets/telegram-logo.webp"
         title="Grup de Telegram"
         linkUrl="https://t.me/onepiececatala/"
       >
@@ -30,7 +30,7 @@
       </ImageCard>
 
       <ImageCard
-        imgUrl="src/assets/xc-logo.webp"
+        imgUrl="../assets/xc-logo.webp"
         title="Xarxa Catala"
         linkUrl="https://xarxacatala.cat"
       >
