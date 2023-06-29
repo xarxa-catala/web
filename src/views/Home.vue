@@ -11,18 +11,18 @@
     <h4 id="xc-welcome-msg">Benvinguts a One Piece Català</h4>
     <div id="xc-cards-container">
 
-      <!-- <ImageCard
+      <ImageCard
         imgUrl="op-card.webp"
         title="Anime Online"
-        linkUrl="show-online"
+        linkUrl="https://www.ccma.cat/tv3/sx3/one-piece/"
       >
         Clica aquí per veure online tots els episodis que hi ha doblats al català.
       </ImageCard>
-      <ImageCard
+      <!-- <ImageCard
         imgUrl="android-logo.webp"
         title="Aplicació Android"
         linkUrl="https://t.me/onepiececatala/101821"
-      >
+      > 
         Descarrega't l'app de Xarxa Català i visualitza el contingut de
         forma nativa al teu dispositiu Android.
       </ImageCard> -->

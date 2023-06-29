@@ -10,11 +10,11 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-              <!-- <li class="nav-item" @click="navigateTo('/show-online')">
+              <li class="nav-item" @click="navigateTo('/show-online')">
                 <a class="nav-link" :class="{ active: isCurrentPage('/show-online') }" aria-current="page">
                   Anime Online
                 </a>
-              </li> -->
+              </li> 
               <li class="nav-item" @click="navigateTo('/about')">
                 <a class="nav-link" :class="{ active: isCurrentPage('/about') }">Qui som?</a>
               </li>
