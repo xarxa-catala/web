@@ -4,7 +4,7 @@
       <div id="info-banner__content">
         <h3 id="info-banner__content__title">One Piece torna al canal SX3!</h3>
         <p id="info-banner__content__body"><a style="color: inherit;" href="https://twitter.com/CatalaOnePiece/status/1671238786544553986/photo/1">Com vam anunciar</a>, despengem els episodis de One Piece per tal de donar
-          audiència al canal SX3 i procurar que comprin i doblin més episodis en català.<br/>Clica <a href=""><b id="info-banner__clicable">aquí</b></a> per veure One Piece al web del SX3.</p>
+          audiència al canal SX3 i procurar que comprin i doblin més episodis en català.<br/>Clica <a href="https://www.ccma.cat/tv3/sx3/one-piece/"><b id="info-banner__clicable">aquí</b></a> per veure One Piece al web del SX3.</p>
       </div>
     </div>
     <img src="../assets/logo.png" />

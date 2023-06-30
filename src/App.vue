@@ -10,8 +10,8 @@
           </button>
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
-              <li class="nav-item" @click="navigateTo('/show-online')">
-                <a class="nav-link" :class="{ active: isCurrentPage('/show-online') }" aria-current="page">
+              <li class="nav-item">
+                <a class="nav-link" href="https://www.ccma.cat/tv3/sx3/one-piece/" :class="{ active: isCurrentPage('/show-online') }" aria-current="page">
                   Anime Online
                 </a>
               </li> 
