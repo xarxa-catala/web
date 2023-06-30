@@ -22,7 +22,7 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import(/* webpackChunkName: "about" */ '../views/Show.vue'),
-    beforeEnter(to, from, next) {
+    beforeEnter(to: any, from: any, next: any) {
       window.location.href = "https://www.ccma.cat/tv3/sx3/one-piece/";
     }
   }
