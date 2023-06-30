@@ -11,9 +11,10 @@
           <div class="collapse navbar-collapse" id="navbarNavDropdown">
             <ul class="navbar-nav">
               <li class="nav-item" @click="navigateTo('/show-online')">
-                <a class="nav-link" :class="{ active: isCurrentPage('/show-online') }" aria-current="page">Anime
-                  Online</a>
-              </li>
+                <a class="nav-link" :class="{ active: isCurrentPage('/show-online') }" aria-current="page">
+                  Anime Online
+                </a>
+              </li> 
               <li class="nav-item" @click="navigateTo('/about')">
                 <a class="nav-link" :class="{ active: isCurrentPage('/about') }">Qui som?</a>
               </li>
@@ -27,8 +28,18 @@
                       href="https://mega.nz/folder/Od4X0YTB#hSQjtzlpz392MsXYE8AnIg">Capítols</a></li>
                   <li><a class="dropdown-item" target="_blank"
                       href="https://mega.nz/folder/HNYnALBJ#Rt-t-4n_5PAntz79kbpOnA">Volums</a></li>
-                  <li><a class="dropdown-item" target="_blank"
-                      href="https://lectortmo.com/library/manga/126/one-piece-catala">TuMangaOnline</a></li>
+                  <li>
+                    <a class="dropdown-item" target="_blank"
+                      href="https://lectortmo.com/library/manga/126/one-piece-catala">
+                      TuMangaOnline
+                    </a>
+                  </li>
+                  <li>
+                    <a class="dropdown-item" target="_blank"
+                      href="https://mega.nz/folder/mMB13RCC#oZIYj4xCzmhmxNLEz0hwsg">
+                      Especials
+                    </a>
+                  </li>
                 </ul>
               </li>
               <li class="nav-item">
