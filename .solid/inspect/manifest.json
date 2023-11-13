@@ -1,0 +1,152 @@
+{
+  "src/assets/android-logo.webp": {
+    "file": "assets/android-logo-95ee52dd.webp",
+    "src": "src/assets/android-logo.webp"
+  },
+  "src/assets/logo.png": {
+    "file": "assets/logo-4ab65e28.png",
+    "src": "src/assets/logo.png"
+  },
+  "src/assets/op-card.webp": {
+    "file": "assets/op-card-241e156a.webp",
+    "src": "src/assets/op-card.webp"
+  },
+  "src/assets/telegram_logo.webp": {
+    "file": "assets/telegram_logo-cc7bc9fd.webp",
+    "src": "src/assets/telegram_logo.webp"
+  },
+  "src/assets/xc-logo.webp": {
+    "file": "assets/xc-logo-5737ce86.webp",
+    "src": "src/assets/xc-logo.webp"
+  },
+  "src/entry-client-legacy.tsx": {
+    "dynamicImports": [
+      "src/routes/[...404]-legacy.tsx",
+      "src/routes/about-legacy.tsx",
+      "src/routes/index-legacy.tsx",
+      "src/routes/show-legacy.tsx",
+      "src/routes/season/[id]-legacy.tsx"
+    ],
+    "file": "assets/entry-client-legacy-ca2cf6ef.js",
+    "isEntry": true,
+    "src": "src/entry-client-legacy.tsx"
+  },
+  "src/entry-client.css": {
+    "file": "assets/entry-client-6bd745f3.css",
+    "src": "src/entry-client.css"
+  },
+  "src/entry-client.tsx": {
+    "css": [
+      "assets/entry-client-6bd745f3.css"
+    ],
+    "dynamicImports": [
+      "src/routes/[...404].tsx",
+      "src/routes/about.tsx",
+      "src/routes/index.tsx",
+      "src/routes/show.tsx",
+      "src/routes/season/[id].tsx"
+    ],
+    "file": "assets/entry-client-0b345619.js",
+    "isEntry": true,
+    "src": "src/entry-client.tsx"
+  },
+  "src/routes/[...404]-legacy.tsx": {
+    "file": "assets/_...404_-legacy-089da75b.js",
+    "imports": [
+      "src/entry-client-legacy.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/[...404]-legacy.tsx"
+  },
+  "src/routes/[...404].tsx": {
+    "file": "assets/_...404_-48a03bc8.js",
+    "imports": [
+      "src/entry-client.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/[...404].tsx"
+  },
+  "src/routes/about-legacy.tsx": {
+    "file": "assets/about-legacy-161da88b.js",
+    "imports": [
+      "src/entry-client-legacy.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/about-legacy.tsx"
+  },
+  "src/routes/about.tsx": {
+    "file": "assets/about-a6acce77.js",
+    "imports": [
+      "src/entry-client.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/about.tsx"
+  },
+  "src/routes/index-legacy.tsx": {
+    "assets": [
+      "assets/logo-4ab65e28.png",
+      "assets/android-logo-95ee52dd.webp",
+      "assets/telegram_logo-cc7bc9fd.webp",
+      "assets/xc-logo-5737ce86.webp",
+      "assets/op-card-241e156a.webp"
+    ],
+    "file": "assets/index-legacy-4b8e5611.js",
+    "imports": [
+      "src/entry-client-legacy.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/index-legacy.tsx"
+  },
+  "src/routes/index.tsx": {
+    "assets": [
+      "assets/logo-4ab65e28.png",
+      "assets/android-logo-95ee52dd.webp",
+      "assets/telegram_logo-cc7bc9fd.webp",
+      "assets/xc-logo-5737ce86.webp",
+      "assets/op-card-241e156a.webp"
+    ],
+    "file": "assets/index-79fcb025.js",
+    "imports": [
+      "src/entry-client.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/index.tsx"
+  },
+  "src/routes/season/[id]-legacy.tsx": {
+    "file": "assets/_id_-legacy-d2bcaf9e.js",
+    "imports": [
+      "src/entry-client-legacy.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/season/[id]-legacy.tsx"
+  },
+  "src/routes/season/[id].tsx": {
+    "file": "assets/_id_-05d630a4.js",
+    "imports": [
+      "src/entry-client.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/season/[id].tsx"
+  },
+  "src/routes/show-legacy.tsx": {
+    "file": "assets/show-legacy-f12f4fe5.js",
+    "imports": [
+      "src/entry-client-legacy.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/show-legacy.tsx"
+  },
+  "src/routes/show.tsx": {
+    "file": "assets/show-e2973a7f.js",
+    "imports": [
+      "src/entry-client.tsx"
+    ],
+    "isDynamicEntry": true,
+    "src": "src/routes/show.tsx"
+  },
+  "vite/legacy-polyfills-legacy": {
+    "file": "assets/polyfills-legacy-6b80fe81.js",
+    "isEntry": true,
+    "src": "vite/legacy-polyfills-legacy"
+  }
+}
