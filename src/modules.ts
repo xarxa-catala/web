@@ -1,1 +1,0 @@
-export const modules = import.meta.glob("/src/assets/*", { eager: true });
