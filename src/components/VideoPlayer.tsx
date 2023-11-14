@@ -9,7 +9,7 @@ import Volume1Icon from "../assets/icons/volume_1.svg"
 import Volume2Icon from "../assets/icons/volume_2.svg"
 import Volume3Icon from "../assets/icons/volume_3.svg"
 import BackIcon from "../assets/icons/back.svg"
-import { createEffect, createMemo, createSignal, onMount, Show } from "solid-js"
+import { createMemo, createSignal, onMount, Show } from "solid-js"
 import "./VideoPlayer.scss"
 
 export function VideoPlayer(props: { title: string, url: string, goBack: () => any }) {
@@ -184,9 +184,6 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
             onClick={changePlayPause}
             ondblclick={turnFullscreen}
             class="w-full h-full flex flex-col items-center justify-center" ref={videoWrapper}>
-            {/* <Show when={!play() && progress() === 0.0}>
-                <img class="cursor-pointer absolute w-40 h-40" src={PlayIcon} />
-            </Show> */}
             <Show when={isWaiting()}>
                 <svg class="absolute animate-spin -ml-1 mr-3 h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                     <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>

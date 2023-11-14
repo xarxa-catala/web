@@ -1,15 +1,13 @@
-import axios from "axios";
-import { createEffect, createResource, createSignal, For, onMount, Show } from "solid-js"
-import { useNavigate, useParams, useSearchParams } from "solid-start"
-import { Episode } from "~/models/Episode";
-import { EpisodeCover } from "~/components/EpisodeCover";
-import { showId } from "~/config";
-import { Season } from "~/models/Season";
-import { VideoPlayer } from "~/components/VideoPlayer";
+import { createEffect, createResource, For, Show } from "solid-js"
+import { useParams, useSearchParams } from "solid-start"
+import { Episode } from "~/models/Episode"
+import { EpisodeCover } from "~/components/EpisodeCover"
+import { showId } from "~/config"
+import { Season } from "~/models/Season"
+import { VideoPlayer } from "~/components/VideoPlayer"
 import { setFullScreen } from "~/root"
-import { getEpisodes, getSeasons } from "~/service";
-import { SeasonCover } from "~/components/SeasonCover";
-import { ShowCover } from "~/components/ShowCover";
+import { getEpisodes, getSeasons } from "~/service"
+import { ShowCover } from "~/components/ShowCover"
 
 const defaultSeason: Season = { id: 0, nom: "test", episodes: [] }
 

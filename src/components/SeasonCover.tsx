@@ -1,7 +1,6 @@
 import { Show, createSignal } from "solid-js"
 import Logo from "~/assets/dw_logo.svg"
 
-
 export function SeasonCover(
     props: {
         name: string,

@@ -1,10 +1,7 @@
-import { A } from "solid-start"
-import Counter from "~/components/Counter"
 import Logo from "~/assets/dw_logo.svg"
 import AndroidLogo from "../assets/android-logo.webp"
 import TelegramLogo from "../assets/telegram_logo.webp"
 import XarxaCatalaLogo from "../assets/xc-logo.webp"
-import ShowCard from "../assets/op-card.webp"
 import ImageCard from "~/components/ImageCard"
 import { siteName, mainShow, mainShowOnline, appLink, telegramLink } from "~/config"
 

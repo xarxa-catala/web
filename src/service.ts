@@ -1,7 +1,5 @@
 import axios from "axios";
-import { setupCache } from 'axios-cache-interceptor';
 import { Season } from "./models/Season";
-import { createMemo, createSignal } from "solid-js";
 import { Episode } from "./models/Episode";
 
 
