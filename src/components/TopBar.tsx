@@ -1,10 +1,8 @@
 import { createSignal, For } from "solid-js"
 import { useNavigate } from "solid-start"
 import { siteName, externalPages, mainShow } from "~/config"
-import tardis from "~/assets/icons/tardis.png"
 
 export function TopBar() {
-
     const [isMenuExpanded, setIsMenuExpanded] = createSignal(false)
     const navigator = useNavigate()
 
