@@ -15,7 +15,7 @@ export function EpisodeCover(
         w-8 h-8
         rounded-full 
         flex items-center justify-center
-        font-semibold text-white">{ props.index }</div>
-        <p class="ms-2 text-white">{props.name}</p>
+        font-semibold ">{ props.index }</div>
+        <p class="ms-2">{props.name}</p>
     </div>
 }

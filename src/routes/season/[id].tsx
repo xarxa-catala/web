@@ -1,5 +1,5 @@
 import axios from "axios";
-import { createEffect, createSignal, For, onMount, Show } from "solid-js"
+import { createEffect, createResource, createSignal, For, onMount, Show } from "solid-js"
 import { useNavigate, useParams, useSearchParams } from "solid-start"
 import { Episode } from "~/models/Episode";
 import { EpisodeCover } from "~/components/EpisodeCover";
@@ -7,18 +7,16 @@ import { showId } from "~/config";
 import { Season } from "~/models/Season";
 import { VideoPlayer } from "~/components/VideoPlayer";
 import { setFullScreen } from "~/root"
+import { getEpisodes, getSeasons } from "~/service";
 
-const STORAGE_KEY_SEASON = "season/"
+const defaultSeason: Season = { id: 0, nom: "", episodes: [] }
 
 export default function SeasonPage() {
     const params = useParams<{ id: string }>()
     const [searchParams, setSearchParams] = useSearchParams<{ episodeId: string }>();
 
-    const defaultSeason: Season = { id: 0, nom: "", episodes: [] }
-
-    const [episodes, setEpisodes] = createSignal<Episode[]>([])
-    const [season, setSeason] = createSignal<Season>(defaultSeason)
-    const navigator = useNavigate()
+    const [episodes] = createResource<Episode[]>(getSeasonEpisodes, { initialValue: [] })
+    const [season] = createResource<Season>(getSeason, { initialValue: defaultSeason })
 
     const playingEpisode = () => {
         if (episodes() != undefined && searchParams.episodeId != undefined) {
@@ -30,37 +28,18 @@ export default function SeasonPage() {
 
     createEffect(() => setFullScreen(playingEpisode() != undefined))
 
+    async function getSeason(): Promise<Season> {
+        const seasons = await getSeasons(showId)
+        const season = seasons.find((season) => season.id === Number(params.id))
+        console.log("Season is ")
+        console.log(season)
+        return season || defaultSeason
+    }
 
-
-    onMount(() => {
-        const seasonsData = localStorage.getItem(STORAGE_KEY_SEASON + params.id)
-        if (seasonsData != null) {
-            setEpisodes(JSON.parse(seasonsData))
-        } else {
-            axios
-                .get(
-                    `https://gestio.multimedia.xarxacatala.cat/api/v1/shows/0/playlists/${params.id}/videos/`
-                )
-                .then((response) => {
-                    console.log("After");
-                    console.log(response.data)
-                    setEpisodes(response.data)
-                    localStorage.setItem(STORAGE_KEY_SEASON + params.id, JSON.stringify(response.data))
-                });
-        }
-
-
-        console.log("Getting playlists")
-        axios
-            .get(
-                `https://gestio.multimedia.xarxacatala.cat/api/v1/shows/${showId}/playlists/`
-            )
-            .then((response) => {
-                const seasons: Season[] = response.data;
-                const season = seasons.find((playlist) => playlist.id === Number(params.id))
-                setSeason(season || defaultSeason)
-            });
-    })
+    async function getSeasonEpisodes(): Promise<Episode[]> {
+        return getEpisodes(Number(params.id))
+    }
+    
 
     return <div>
         <div class="flex flex-row flex-wrap justify-center mt-8 gap-8">
@@ -69,7 +48,7 @@ export default function SeasonPage() {
             <div class="flex flex-col items-start mx-4">
                 <p class="text-3xl text-white">{season().nom}</p>
                 <p class="text-white lg:w-[800px] my-3">
-                Ara que el Doctor i la Clara han establert una dinàmica com una associació d'iguals, gaudeixen de la diversió i l'emoció que tot l'espai i el temps tenen per oferir. Enredats amb fantasmes, víkings i l'últim mal dels Daleks, s'embarquen en les seves aventures més grans fins ara. La Missy ha tornat per turmentar el Doctor una vegada més, els Zygons inspiren por a mesura que canvien de forma a clons humans, i una nova arribada es mou de manera còsmica.
+                    Ara que el Doctor i la Clara han establert una dinàmica com una associació d'iguals, gaudeixen de la diversió i l'emoció que tot l'espai i el temps tenen per oferir. Enredats amb fantasmes, víkings i l'últim mal dels Daleks, s'embarquen en les seves aventures més grans fins ara. La Missy ha tornat per turmentar el Doctor una vegada més, els Zygons inspiren por a mesura que canvien de forma a clons humans, i una nova arribada es mou de manera còsmica.
                 </p>
                 <div class="flex flex-row justify-center">
                     <div class="flex flex-col mt-2">

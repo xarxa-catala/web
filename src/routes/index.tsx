@@ -6,7 +6,7 @@ import TelegramLogo from "../assets/telegram_logo.webp"
 import XarxaCatalaLogo from "../assets/xc-logo.webp"
 import ShowCard from "../assets/op-card.webp"
 import ImageCard from "~/components/ImageCard"
-import { siteName, mainShow, mainShowOnline } from "~/config"
+import { siteName, mainShow, mainShowOnline, appLink, telegramLink } from "~/config"
 
 export default function Home() {
   return <>
@@ -19,21 +19,21 @@ export default function Home() {
           imgUrl={mainShowOnline}
           title={mainShow}
           linkUrl="show"
-          description="Clica aquí per veure online tots els episodis que hi ha doblats al català."
+          description="Clica aquí per veure online tots els episodis que hi ha doblats al català i més!"
         />
 
         <ImageCard
           imgUrl={AndroidLogo}
           title="Aplicació Android"
-          linkUrl="https://t.me/onepiececatala/101821"
+          linkUrl={appLink} 
           description="Descarrega't l'app de Xarxa Català i visualitza el contingut de forma nativa al teu dispositiu Android."
         />
 
         <ImageCard
           imgUrl={TelegramLogo}
           title="Grup de Telegram"
-          linkUrl="https://t.me/onepiececatala/"
-          description="Si voleu parlar amb altres seguidors de One Piece i amb els administradors del Projecte, uniu-vos al nostre grup de Telegram!"
+          linkUrl={telegramLink}
+          description="Si voleu parlar amb altres seguidors i amb els administradors del Projecte, uniu-vos al nostre grup de Telegram!"
         />
 
         <ImageCard

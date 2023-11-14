@@ -16,9 +16,11 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
     let videoWrapper: Element | undefined = undefined
     let video: HTMLVideoElement | undefined = undefined
 
+    const hideUiTimeInMs = 3000
     const [showVideoControls, setShowVideoControls] = createSignal(false)
     const [isFullscreen, setIsFullScreen] = createSignal(false)
     const [play, setPlay] = createSignal(false)
+    const [isWaiting, setIsWaiting] = createSignal(false)
     const playIcon = createMemo(() => {
         if (play()) {
             return PauseIcon
@@ -61,18 +63,17 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
         setShowVideoControls(true)
         clearInterval(timer)
 
-        console.log("ShowUiControls")
-        
         timer = setInterval(() => {
-            if (showVideoControls()) {
+            if (showVideoControls() && play()) {
                 setShowVideoControls(false)
             }
-        }, 4000)
+        }, hideUiTimeInMs)
     }
 
 
 
     onMount(() => {
+        console.log("Progress is " + progress())
         document.addEventListener('webkitfullscreenchange', function (e: any) {
             console.log("webkitfullscreenchange")
             setIsFullScreen(!isFullscreen())
@@ -115,6 +116,11 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
             console.log("Setting new value! Is playing: " + playVideo)
             setPlay(playVideo)
         }
+    }
+
+    function onWaiting(isWaiting: boolean) {
+        console.log("Is waiting: " + isWaiting)
+        setIsWaiting(isWaiting)
     }
 
     function isVideoPlaying(video: HTMLVideoElement): boolean {
@@ -194,12 +200,22 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
         <div onMouseMove={showUiControls}
             onClick={changePlayPause}
             ondblclick={turnFullscreen}
-            class="w-full h-full flex flex-col items-center" ref={videoWrapper}>
-
+            class="w-full h-full flex flex-col items-center justify-center" ref={videoWrapper}>
+            {/* <Show when={!play() && progress() === 0.0}>
+                <img class="cursor-pointer absolute w-40 h-40" src={PlayIcon} />
+            </Show> */}
+            <Show when={isWaiting()}>
+                <svg class="absolute animate-spin -ml-1 mr-3 h-10 w-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+            </Show>
             <video ref={video} class={(showVideoControls() ? "cursor-pointer" : "cursor-none") + " h-full w-full"} autoplay
                 onTimeUpdate={onTimeUpdate}
                 onPlay={() => onPlayPause(true)}
                 onPause={() => onPlayPause(false)}
+                onWaiting={() => onWaiting(true)}
+                onPlaying={() => onWaiting(false)}
                 onVolumeChange={(e) => updateVolumeState(e.currentTarget)}
                 onLoadedMetadata={() => setVideoDuration(video?.duration || 0)}>
                 <source src={props.url} type="video/mp4" />
@@ -210,7 +226,7 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
                 <div class="fixed flex flex-row items-start top-0 pt-6 pl-4 h-24 w-full z-10 bg-gradient-to-b from-[#000000c5]" onClick={(e) => e.stopImmediatePropagation()} onDblClick={(e) => e.stopImmediatePropagation()}>
                     <div class="flex flex-row items-center">
                         <button onClick={props.goBack}><img src={BackIcon} /></button>
-                        <span class="text-white ml-4 text-2xl">{props.title || "Carregant episodi..."}</span>
+                        <span class="ml-4 text-2xl">{props.title || "Carregant episodi..."}</span>
                     </div>
                 </div>
                 <div class="absolute z-10 bottom-0 w-full flex flex-col py-2 px-4 bg-gradient-to-t from-[#000000c5]" onClick={(e) => e.stopImmediatePropagation()} onDblClick={(e) => e.stopImmediatePropagation()}>
@@ -224,7 +240,7 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
                         <PlayerButton icon={RewindIcon} onClick={() => { }} />
                         <PlayerButton icon={playIcon()} onClick={changePlayPause} />
                         <PlayerButton icon={ForwardIcon} onClick={() => { }} />
-                        <div class="flex flex-row items-center visible">
+                        <div class="lg:flex flex-row items-center hidden lg:visible">
                             <PlayerButton icon={volumeIcon()} onClick={() => { video!.muted = !video!.muted }} />
                             <div class="w-28 flex items-center">
                                 <input value={volumeDisplayed()} type="range" min="0" max="1" step="0.05" onInput={onVolumeChange} onClick={onVolumeChange} />
@@ -252,86 +268,3 @@ function PlayerButton(props: { icon: string, onClick: () => any }) {
         <img src={props.icon} />
     </button>
 }
-
-// EVENTS
-
-// onMounted(() => {
-//   // Hide player controls
-//   videoWrapper!.addEventListener('mouseout', () => {
-//     playerControlsVisibility(false);
-//   });
-
-//   // Pause/play video
-//   playControl!.addEventListener('click', function (e: any) {
-//     let $this: any = e.currentTarget;
-//     if ($this!.classList.contains('paused')) {
-//       video!.play();
-//     } else {
-//       video!.pause();
-//     }
-//     $this.classList.toggle('paused');
-//   });
-
-//   // Stop video
-//   stopControl.addEventListener('click', () => {
-//     video!.pause();
-//     video!.currentTime = 0;
-//     playControl!.classList.add('paused');
-//   });
-
-//   // Replay video 
-//   replayControl!.addEventListener('click', () => {
-//     video!.currentTime = 0;
-//     playControl!.classList.remove('paused');
-//     video!.play();
-//   });
-
-//   // Rewind video
-//   rewindControl.addEventListener('click', () => {
-//     video!.currentTime = video!.currentTime - 10;
-//   });
-
-//   // Forward video
-//   forwardControl.addEventListener('click', () => {
-//     video!.currentTime = video!.currentTime + 10;
-//   });
-
-//   // Mute/unmute video
-//   volumeControl.addEventListener('click', (e: any): void => {
-//     volumeControl.parentNode.classList.toggle('muted');
-//     if (volumeControl.parentNode.classList.contains('muted')) {
-//       volumeSlider.value = 0;
-//       video!.volume = 0;
-//     } else {
-//       volumeSlider.value = 1;
-//       video!.volume = 1;
-//     }
-//   });
-
-//   // Volume slider
-//   volumeSlider.addEventListener("input", () => {
-//     if (volumeSlider.value > 0) {
-//       volumeControl.parentNode.classList.remove('muted');
-//     } else {
-//       volumeControl.parentNode.classList.add('muted');
-//     }
-//     video!.volume = volumeSlider.value;
-//   });
-
-//   // Progressbar
-//   video!.addEventListener('timeupdate', (e: any) => {
-//     let progress = (100 / video!.duration) * video!.currentTime;
-//     document.querySelector('.progress__current')!.setAttribute("style", `width:${progress}%`);
-//   });
-
-
-
-//   // Fullscreen mode 
-//   fullscreenControl.addEventListener('click', () => {
-//     let isFullscreen = videoWrapper!.classList.contains('fullscreen');
-//     if (!isFullscreen) {
-//       turnFullscreen(true);
-//     } else {
-//       turnFullscreen(false);
-//     }
-//   });
