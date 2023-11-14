@@ -73,14 +73,11 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
 
 
     onMount(() => {
-        console.log("Progress is " + progress())
         document.addEventListener('webkitfullscreenchange', function (e: any) {
-            console.log("webkitfullscreenchange")
             setIsFullScreen(!isFullscreen())
         });
 
         document.addEventListener('mozfullscreenchange', function (e: any) {
-            console.log("mozfullscreenchange")
             setIsFullScreen(!isFullscreen())
         });
 
@@ -97,10 +94,7 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
     }
 
     function changePlayPause() {
-        console.log(video);
-
         if (video != null && showVideoControls()) {
-            console.log("Effect triggered")
             if (video != null) {
                 if (isVideoPlaying(video)) {
                     video.pause()
@@ -113,13 +107,11 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
 
     function onPlayPause(playVideo: boolean) {
         if (playVideo != play()) {
-            console.log("Setting new value! Is playing: " + playVideo)
             setPlay(playVideo)
         }
     }
 
     function onWaiting(isWaiting: boolean) {
-        console.log("Is waiting: " + isWaiting)
         setIsWaiting(isWaiting)
     }
 
@@ -153,7 +145,6 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
 
     function onVolumeChange(event: Event) {
         const newVolume = (event.currentTarget as any).value
-        console.log("New volume: " + newVolume)
 
         if (video != null) {
             video.volume = newVolume
@@ -162,21 +153,13 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
     }
 
     function onSeek(event: Event) {
-        console.log(event)
-        console.log(event.currentTarget)
-        console.log("Layer X is " + (event as any).layerX)
         const layerX: number = (event as any).layerX
         const width: number = (event.currentTarget as any).clientWidth
-        console.log("Width is " + width)
         const percentage = layerX / width
 
-        console.log("Percentage is " + percentage)
-
         if (video != null) {
-            console.log("Video duration is " + video.duration)
             video.currentTime = video.duration * percentage
         }
-
     }
 
     function formatSeconds(seconds: number) {
@@ -230,7 +213,7 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
                     </div>
                 </div>
                 <div class="absolute z-10 bottom-0 w-full flex flex-col py-2 px-4 bg-gradient-to-t from-[#000000c5]" onClick={(e) => e.stopImmediatePropagation()} onDblClick={(e) => e.stopImmediatePropagation()}>
-                    <div class="w-full h-1 py-4 cursor-pointer relative flex items-center" onClick={onSeek} onDrag={(e) => console.log(e)}>
+                    <div class="w-full h-1 py-4 cursor-pointer relative flex items-center" onClick={onSeek}>
                         <div class="bg-blue-100 w-full h-1">
                             <div class="h-full bg-blue-400" style={`width: ${progress()}%`}></div>
                         </div>

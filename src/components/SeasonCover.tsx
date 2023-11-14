@@ -10,8 +10,8 @@ export function SeasonCover(
 ) {
     const [showAlternativeUi, setShowAlternativeUi] = createSignal(false)
 
-    return <div class="group flex flex-col items-center cursor-pointer relative w-60">
-        <div class="w-full h-[360px] rounded-lg overflow-clip">
+    return <div class="group flex flex-col items-center cursor-pointer relative w-32">
+        <div class="w-full h-48 rounded-lg overflow-clip">
             <Show
                 when={!showAlternativeUi()}
                 fallback={
@@ -23,10 +23,7 @@ export function SeasonCover(
                 <img
                     class="w-full h-full hover:scale-110 transition-transform duration-200 "
                     src={props.imageUrl}
-                    onError={(error) => {
-                        console.log(error)
-                        setShowAlternativeUi(true)
-                    }}
+                    onError={() => setShowAlternativeUi(true)}
                 />
             </Show>
         </div>

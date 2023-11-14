@@ -8,7 +8,7 @@ export function EpisodeCover(
     return <div class="relative flex flex-row items-center 
     cursor-pointer h-10 
     hover:bg-slate-700 hover:border-slate-300 rounded-lg border-transparent border-2
-    px-1 py-5 w-96
+    px-1 py-5 w-full
     ">
         <div class="
         bg-blue-600
