@@ -46,7 +46,7 @@ export function TopBar() {
                             onClick={() => { setIsOtherShowsExpanded(!isOtherShowsExpanded()) }} />
 
 
-                        <div class="-ml-3 lg:fixed flex-col lg:group-hover:flex lg:hidden" classList={{ "flex": isOtherShowsExpanded(), "hidden": !isOtherShowsExpanded() }}>
+                        <div class="lg:-ml-4 lg:fixed flex-col lg:group-hover:flex lg:hidden rounded overflow-clip lg:rounded-none" classList={{ "flex": isOtherShowsExpanded(), "hidden": !isOtherShowsExpanded() }}>
                             <For each={additionalShows}>{(page) =>
                                 <DropdownMenuEntry
                                     name={page.name}
@@ -99,7 +99,7 @@ function DropdownMenuEntry(
     return <a
         onClick={() => props.onClick()}
         href={props.url}
-        class="py-3 px-3 bg-slate-950 hover:bg-slate-800 cursor-pointer w-full">
+        class="py-3 px-3 bg-slate-800 lg:bg-slate-950 hover:bg-slate-800 cursor-pointer w-full">
         {props.name}
     </a>
 }
