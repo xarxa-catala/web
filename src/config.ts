@@ -12,7 +12,7 @@ export const showId = 1;
 export const siteName: string = "Doctor Who Català"
 export const mainShow: string = "Doctor Who Online"
 export const additionalShows: AdditionalShow[] = [
-    { id: 2, name: "Torchwood" },   
+    { id: 2, name: "Torchwood" },
     { id: 3, name: "Class" },
     // { id: 5, name: "The Sarah Jane Adventures" },
 ]

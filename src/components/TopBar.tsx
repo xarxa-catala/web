@@ -9,7 +9,13 @@ export function TopBar() {
 
 
     return <nav class="left-0 top-0 w-full flex items-center justify-between flex-wrap bg-slate-950 py-4 px-6">
-        <button onclick={() => navigator('')} class="flex items-center flex-shrink-0 text-white mr-6">
+        <button
+            onclick={() => {
+                navigator('')
+                setIsMenuExpanded(false)
+            }}
+            class="flex items-center flex-shrink-0 text-white mr-6"
+        >
             <span class="font-semibold text-xl tracking-tight">{siteName}</span>
         </button>
         <div class="block lg:hidden">
@@ -33,14 +39,14 @@ export function TopBar() {
                     }} />
 
                 <Show when={additionalShows.length > 0}>
-                    <div class="lg:inline-block group">
+                    <div class="lg:inline-block lg:w-auto group w-full">
                         <ToolbarMenuEntry
                             name={"Altres sèries"}
                             url={undefined}
                             onClick={() => { setIsOtherShowsExpanded(!isOtherShowsExpanded()) }} />
 
 
-                        <div class="lg:fixed flex-col lg:group-hover:flex lg:hidden" classList={{ "flex": isOtherShowsExpanded(), "hidden": !isOtherShowsExpanded() }}>
+                        <div class="-ml-3 lg:fixed flex-col lg:group-hover:flex lg:hidden" classList={{ "flex": isOtherShowsExpanded(), "hidden": !isOtherShowsExpanded() }}>
                             <For each={additionalShows}>{(page) =>
                                 <DropdownMenuEntry
                                     name={page.name}
@@ -93,7 +99,7 @@ function DropdownMenuEntry(
     return <a
         onClick={() => props.onClick()}
         href={props.url}
-        class="py-2 px-3 lg:-ml-3 bg-slate-950 hover:bg-slate-800 cursor-pointer">
+        class="py-2 px-3 bg-slate-950 hover:bg-slate-800 cursor-pointer w-full">
         {props.name}
     </a>
 }
