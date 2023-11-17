@@ -1,9 +1,10 @@
-import { createSignal, For } from "solid-js"
+import { createSignal, For, Show } from "solid-js"
 import { useNavigate } from "solid-start"
-import { siteName, externalPages, mainShow } from "~/config"
+import { siteName, externalPages, mainShow, additionalShows } from "~/config"
 
 export function TopBar() {
     const [isMenuExpanded, setIsMenuExpanded] = createSignal(false)
+    const [isOtherShowsExpanded, setIsOtherShowsExpanded] = createSignal(false)
     const navigator = useNavigate()
 
 
@@ -25,9 +26,27 @@ export function TopBar() {
             <div class="text-sm">
                 <ToolbarMenuEntry
                     name={mainShow}
-                    url={"#"}
+                    url={undefined}
                     onClick={() => navigator("show")} />
 
+                <Show when={additionalShows.length > 0}>
+                    <div class="lg:inline-block group">
+                        <ToolbarMenuEntry
+                            name={"Altres sèries"}
+                            url={undefined}
+                            onClick={() => { setIsOtherShowsExpanded(!isOtherShowsExpanded()) }} />
+
+
+                        <div class="lg:fixed flex-col lg:group-hover:flex lg:hidden" classList={{ "flex": isOtherShowsExpanded(), "hidden": !isOtherShowsExpanded() }}>
+                            <For each={additionalShows}>{(page) =>
+                                <DropdownMenuEntry
+                                    name={page.name}
+                                    url={"#"}
+                                    onClick={() => { navigator(`show?id=${page.id}`) }} />
+                            }</For>
+                        </div>
+                    </div>
+                </Show>
                 <For each={externalPages}>{(page) =>
                     <ToolbarMenuEntry
                         name={page.displayName}
@@ -43,6 +62,23 @@ export function TopBar() {
 function ToolbarMenuEntry(
     props: {
         name: string,
+        url: string | undefined,
+        onClick: () => any,
+    }
+) {
+    return <a
+        onClick={() => props.onClick()}
+        href={props.url}
+        class="block w-full lg:w-auto py-2 lg:inline-block lg:mt-0 font-medium text-blue-50 hover:text-white mr-4 cursor-pointer">
+        {props.name}
+    </a>
+}
+
+
+
+function DropdownMenuEntry(
+    props: {
+        name: string,
         url: string,
         onClick: () => any,
     }
@@ -50,7 +86,7 @@ function ToolbarMenuEntry(
     return <a
         onClick={() => props.onClick()}
         href={props.url}
-        class="block w-full lg:w-auto py-2 lg:inline-block lg:mt-0 font-medium text-blue-50 hover:text-white mr-4">
+        class="py-2 px-3 lg:-ml-3 bg-slate-950 hover:bg-slate-800">
         {props.name}
     </a>
 }

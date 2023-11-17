@@ -9,7 +9,7 @@ import { setFullScreen } from "~/root"
 import { getEpisodes, getSeasons } from "~/service"
 import { ShowCover } from "~/components/ShowCover"
 
-const defaultSeason: Season = { id: 0, nom: "test", episodes: [] }
+const defaultSeason: Season = { id: 0, nom: "", episodes: [] }
 
 export default function SeasonPage() {
     const params = useParams<{ id: string }>()
