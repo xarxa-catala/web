@@ -1,5 +1,5 @@
 import { createResource, createSignal, For, onMount } from "solid-js"
-import { useNavigate } from "solid-start";
+import { useNavigate, useSearchParams } from "solid-start";
 import { Season } from "~/models/Season";
 import { showId } from "~/config"
 import { SeasonCover } from "~/components/SeasonCover";
@@ -7,8 +7,15 @@ import { getSeasons } from "~/service";
 import { ShowCover } from "~/components/ShowCover";
 
 export default function Show() {
-    const [seasons] = createResource<Season[]>(() => getSeasons(showId))
     const navigator = useNavigate()
+    const [searchParams] = useSearchParams<{ id: string }>()
+    const [seasons] = createResource(() => searchParams.id || showId, getShowSeasons, { deferStream: true })
+
+    async function getShowSeasons(): Promise<Season[]> {
+        const searchShowId = Number(searchParams.id || showId)
+
+        return await getSeasons(searchShowId)
+    }
 
     return <div class="flex flex-col items-center w-full">
         <div class="flex flex-row mx-4 lg:w-3/5 gap-4 mt-8 flex-wrap justify-center">
