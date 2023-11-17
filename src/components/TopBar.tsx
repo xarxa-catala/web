@@ -27,7 +27,10 @@ export function TopBar() {
                 <ToolbarMenuEntry
                     name={mainShow}
                     url={undefined}
-                    onClick={() => navigator("show")} />
+                    onClick={() => {
+                        navigator("show")
+                        setIsMenuExpanded(false)
+                    }} />
 
                 <Show when={additionalShows.length > 0}>
                     <div class="lg:inline-block group">
@@ -41,8 +44,12 @@ export function TopBar() {
                             <For each={additionalShows}>{(page) =>
                                 <DropdownMenuEntry
                                     name={page.name}
-                                    url={"#"}
-                                    onClick={() => { navigator(`show?id=${page.id}`) }} />
+                                    url={undefined}
+                                    onClick={() => {
+                                        navigator(`show?id=${page.id}`)
+                                        setIsOtherShowsExpanded(false)
+                                        setIsMenuExpanded(false)
+                                    }} />
                             }</For>
                         </div>
                     </div>
@@ -79,14 +86,14 @@ function ToolbarMenuEntry(
 function DropdownMenuEntry(
     props: {
         name: string,
-        url: string,
+        url: string | undefined,
         onClick: () => any,
     }
 ) {
     return <a
         onClick={() => props.onClick()}
         href={props.url}
-        class="py-2 px-3 lg:-ml-3 bg-slate-950 hover:bg-slate-800">
+        class="py-2 px-3 lg:-ml-3 bg-slate-950 hover:bg-slate-800 cursor-pointer">
         {props.name}
     </a>
 }
