@@ -8,13 +8,13 @@ export function TopBar() {
     const navigator = useNavigate()
 
 
-    return <nav class="left-0 top-0 w-full flex items-center justify-between flex-wrap bg-slate-950 py-4 px-6">
+    return <nav class="left-0 top-0 w-full flex items-center justify-between flex-wrap bg-slate-950 px-6">
         <button
             onclick={() => {
                 navigator('')
                 setIsMenuExpanded(false)
             }}
-            class="flex items-center flex-shrink-0 text-white mr-6"
+            class="flex items-center flex-shrink-0 text-white mr-6 py-4"
         >
             <span class="font-semibold text-xl tracking-tight">{siteName}</span>
         </button>
@@ -28,7 +28,7 @@ export function TopBar() {
                 </svg>
             </button>
         </div>
-        <div class="w-full mt-2 lg:mt-0 block flex-grow lg:flex lg:items-center lg:w-auto" classList={{ 'hidden': !isMenuExpanded() }}>
+        <div class="w-full mb-2 lg:mb-0 lg:mt-0 block flex-grow lg:flex lg:items-center lg:w-auto" classList={{ 'hidden': !isMenuExpanded() }}>
             <div class="text-sm">
                 <ToolbarMenuEntry
                     name={mainShow}
@@ -82,7 +82,7 @@ function ToolbarMenuEntry(
     return <a
         onClick={() => props.onClick()}
         href={props.url}
-        class="block w-full lg:w-auto py-2 lg:inline-block lg:mt-0 font-medium text-blue-50 hover:text-white mr-4 cursor-pointer">
+        class="block w-full lg:w-auto py-3 lg:py-6 lg:inline-block lg:mt-0 font-medium text-blue-50 hover:text-white mr-4 cursor-pointer">
         {props.name}
     </a>
 }
@@ -99,7 +99,7 @@ function DropdownMenuEntry(
     return <a
         onClick={() => props.onClick()}
         href={props.url}
-        class="py-2 px-3 bg-slate-950 hover:bg-slate-800 cursor-pointer w-full">
+        class="py-3 px-3 bg-slate-950 hover:bg-slate-800 cursor-pointer w-full">
         {props.name}
     </a>
 }
