@@ -15,6 +15,7 @@ import "./VideoPlayer.scss"
 export function VideoPlayer(props: { title: string, url: string, goBack: () => any }) {
     let videoWrapper: Element | undefined = undefined
     let video: HTMLVideoElement | undefined = undefined
+    let hideUiTimer: NodeJS.Timer | undefined = undefined
 
     const hideUiTimeInMs = 3000
     const [showVideoControls, setShowVideoControls] = createSignal(false)
@@ -55,22 +56,17 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
         return (video?.duration || 0) * (progress() / 100)
     })
 
-    let timer: NodeJS.Timer | undefined = undefined
-
-
 
     function showUiControls() {
         setShowVideoControls(true)
-        clearInterval(timer)
+        clearInterval(hideUiTimer)
 
-        timer = setInterval(() => {
+        hideUiTimer = setInterval(() => {
             if (showVideoControls() && play()) {
                 setShowVideoControls(false)
             }
         }, hideUiTimeInMs)
     }
-
-
 
     onMount(() => {
         document.addEventListener('webkitfullscreenchange', function (e: any) {
@@ -84,9 +80,11 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
         document.addEventListener('fullscreenchange', function (e: any) {
             setIsFullScreen(!isFullscreen())
         });
+
+        document.body.onkeydown = keyDown
     })
 
-    function onTimeUpdate(event: Event) {
+    function onTimeUpdate() {
         if (video != null) {
             const playerProgress = ((video.currentTime / video.duration) * 100)
             setProgress(playerProgress)
@@ -116,7 +114,7 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
     }
 
     function isVideoPlaying(video: HTMLVideoElement): boolean {
-        return !!(video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2)
+        return (video.currentTime > 0 && !video.paused && !video.ended && video.readyState > 2)
     }
 
     function turnFullscreen() {
@@ -162,6 +160,27 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
         }
     }
 
+    function rewind() {
+        if (video != null) {
+            video.currentTime -= 10
+        }
+    }
+
+    function forward() {
+        if (video != null && video.duration) {
+            video.currentTime += 10
+        }
+    }
+
+    function keyDown(event: KeyboardEvent) {
+        console.log(event)
+        if (event.key == "ArrowRight") {
+            forward()
+        } else if (event.key == "ArrowLeft") {
+            rewind()
+        }
+    }
+
     function formatSeconds(seconds: number) {
         var date = new Date(1970, 0, 1);
         date.setSeconds(seconds);
@@ -181,6 +200,7 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
 
     return <>
         <div onMouseMove={showUiControls}
+            onKeyDown={keyDown}
             onClick={changePlayPause}
             ondblclick={turnFullscreen}
             class="w-full h-full flex flex-col items-center justify-center" ref={videoWrapper}>
@@ -197,7 +217,8 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
                 onWaiting={() => onWaiting(true)}
                 onPlaying={() => onWaiting(false)}
                 onVolumeChange={(e) => updateVolumeState(e.currentTarget)}
-                onLoadedMetadata={() => setVideoDuration(video?.duration || 0)}>
+                onLoadedMetadata={() => setVideoDuration(video?.duration || 0)}
+                onKeyDown={keyDown}>
                 <source src={props.url} type="video/mp4" />
             </video>
 
@@ -209,18 +230,33 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
                         <span class="ml-4 text-2xl">{props.title || "Carregant episodi..."}</span>
                     </div>
                 </div>
-                <div class="absolute z-10 bottom-0 w-full flex flex-col py-2 px-4 bg-gradient-to-t from-[#000000c5]" onClick={(e) => e.stopImmediatePropagation()} onDblClick={(e) => e.stopImmediatePropagation()}>
-                    <div class="w-full h-1 py-4 cursor-pointer relative flex items-center" onClick={onSeek}>
+                <div
+                    class="absolute z-10 bottom-0 w-full flex flex-col py-2 px-4 bg-gradient-to-t from-[#000000c5]"
+                    onClick={(e) => e.stopImmediatePropagation()}
+                    onDblClick={(e) => e.stopImmediatePropagation()}
+                    onKeyDown={keyDown}
+                >
+                    <div
+                        class="w-full h-1 py-4 cursor-pointer relative flex items-center"
+                        onClick={onSeek}
+                        onDragEnd={onSeek}
+                    >
                         <div class="bg-blue-100 w-full h-1">
                             <div class="h-full bg-blue-400" style={`width: ${progress()}%`}></div>
                         </div>
                         <div class="absolute bg-blue-600 rounded-full h-4 w-4" style={`left: ${progress()}%`}></div>
                     </div>
-                    <div class="flex flex-row w-full items-center justify-center">
-                        <PlayerButton icon={RewindIcon} onClick={() => { }} />
+                    <div
+                        class="flex flex-row w-full items-center justify-center"
+                        onKeyDown={keyDown}
+                    >
+                        <PlayerButton icon={RewindIcon} onClick={rewind} />
                         <PlayerButton icon={playIcon()} onClick={changePlayPause} />
-                        <PlayerButton icon={ForwardIcon} onClick={() => { }} />
-                        <div class="lg:flex flex-row items-center hidden lg:visible">
+                        <PlayerButton icon={ForwardIcon} onClick={forward} />
+                        <div
+                            class="lg:flex flex-row items-center hidden lg:visible"
+                            onKeyDown={(e) => e.stopImmediatePropagation()}
+                        >
                             <PlayerButton icon={volumeIcon()} onClick={() => { video!.muted = !video!.muted }} />
                             <div class="w-28 flex items-center">
                                 <input value={volumeDisplayed()} type="range" min="0" max="1" step="0.05" onInput={onVolumeChange} onClick={onVolumeChange} />
