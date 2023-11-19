@@ -8,7 +8,7 @@ import { siteName, mainShow, mainShowOnline, appLink, telegramLink } from "~/con
 export default function Home() {
   return <>
     <div class="flex flex-col items-center">
-      <img class="mt-4 w-80 h-auto mb-2" src={Logo} />
+      <img class="mt-4 w-80 h-80 mb-2" src={Logo} />
       <h4 class="mb-8 mt-4 text-2xl font-semibold text-white">Benvinguts a {siteName}</h4>
 
       <div class="flex flex-row justify-center gap-4 flex-wrap">

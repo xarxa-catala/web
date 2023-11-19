@@ -1,8 +1,8 @@
-import { Episode } from "./Episode";
+import { Season } from "./Season";
 
-export interface Season {
+export interface XcShow {
     id: number,
-    videos: Episode[],
+    playlists: Season[],
     nom: string,
     description: string,
     cover: string | undefined,
