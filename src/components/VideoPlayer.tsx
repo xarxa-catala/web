@@ -157,6 +157,7 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
 
         if (video != null) {
             video.currentTime = video.duration * percentage
+            setProgress(percentage * 100)
         }
     }
 
