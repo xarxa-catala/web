@@ -1,4 +1,4 @@
-import { createEffect, createResource, For, Show } from "solid-js"
+import { createEffect, createMemo, createResource, For, Show } from "solid-js"
 import { useParams, useSearchParams } from "solid-start"
 import { Episode } from "~/models/Episode"
 import { EpisodeCover } from "~/components/EpisodeCover"
@@ -6,21 +6,19 @@ import { showId } from "~/config"
 import { Season } from "~/models/Season"
 import { VideoPlayer } from "~/components/VideoPlayer"
 import { setFullScreen } from "~/root"
-import { getEpisodes, getSeasons } from "~/service"
+import { getSeasonDetail } from "~/service"
 import { ShowCover } from "~/components/ShowCover"
 
-const defaultSeason: Season = { id: 0, nom: "", episodes: [] }
+const defaultSeason: Season = { id: 0, nom: "", cover: undefined, description: "", videos: [] }
 
 export default function SeasonPage() {
     const params = useParams<{ id: string }>()
     const [searchParams, setSearchParams] = useSearchParams<{ episodeId: string }>();
-
-    const [episodes] = createResource<Episode[]>(getSeasonEpisodes, { initialValue: [] })
-    const [season] = createResource<Season>(getSeason, { initialValue: defaultSeason })
+    const [season] = createResource(getSeasonEpisodes, { initialValue: defaultSeason })
 
     const playingEpisode = () => {
-        if (episodes() != undefined && searchParams.episodeId != undefined) {
-            return episodes().find((episode) => episode.id === Number(searchParams.episodeId))
+        if (season().videos != undefined && searchParams.episodeId != undefined) {
+            return season().videos.find((video) => video.id === Number(searchParams.episodeId))
         }
 
         return undefined
@@ -28,33 +26,23 @@ export default function SeasonPage() {
 
     createEffect(() => setFullScreen(playingEpisode() != undefined))
 
-    async function getSeason(): Promise<Season> {
-        const seasonId = params.id
-        const seasons = await getSeasons(showId)
-
-        const season = seasons.find((season) => season.id === Number(seasonId))
-
-        return season || defaultSeason
+    async function getSeasonEpisodes(): Promise<Season> {
+        return await getSeasonDetail(Number(params.id)) || defaultSeason
     }
-
-    async function getSeasonEpisodes(): Promise<Episode[]> {
-        return getEpisodes(Number(params.id))
-    }
-
 
     return <div class="mx-4 lg:mx-0">
         <div class="flex flex-row flex-wrap justify-center mt-8 gap-8 mb-8 lg:mb-0">
             <div class="rounded-lg w-80 h-[480px]">
-                <ShowCover imageUrl={`/images/seasons/${season().id}.webp`} />
+                <ShowCover imageUrl={season().cover} />
             </div>
             <div class="flex flex-col items-start">
                 <p class="text-3xl text-white">{season().nom}</p>
                 <p class="text-white lg:w-[800px] my-3">
-                    Ara que el Doctor i la Clara han establert una dinàmica com una associació d'iguals, gaudeixen de la diversió i l'emoció que tot l'espai i el temps tenen per oferir. Enredats amb fantasmes, víkings i l'últim mal dels Daleks, s'embarquen en les seves aventures més grans fins ara. La Missy ha tornat per turmentar el Doctor una vegada més, els Zygons inspiren por a mesura que canvien de forma a clons humans, i una nova arribada es mou de manera còsmica.
+                    {season().description}
                 </p>
                 <div class="flex flex-row justify-center w-full">
                     <div class="flex flex-col mt-2 w-full">
-                        <For each={episodes()}>{(episode, i) =>
+                        <For each={season().videos}>{(episode, i) =>
                             <div class="w-full" onClick={() => setSearchParams({ episodeId: episode.id })}>
                                 <EpisodeCover name={episode.nom} index={i() + 1} />
                             </div>

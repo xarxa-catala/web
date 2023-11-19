@@ -4,14 +4,16 @@ import Logo from "~/assets/dw_logo.svg"
 
 export function ShowCover(
     props: {
-        imageUrl: string,
+        imageUrl: string | undefined,
     }
 ) {
     const [showAlternativeUi, setShowAlternativeUi] = createSignal(false)
 
+    console.log("Show " + props.imageUrl)
+
     return <div class="w-full h-full rounded-lg overflow-clip">
         <Show
-            when={!showAlternativeUi()}
+            when={!showAlternativeUi() && props.imageUrl != undefined}
             fallback={
                 <div class="bg-slate-700 w-full h-full">
                     <img src={Logo} class="w-full h-full" />
