@@ -12,6 +12,7 @@ export default function Show() {
     const [searchParams] = useSearchParams<{ id: string }>()
     const showDefault: XcShow = { nom: "", description: "", playlists: [], id: 0, cover: "" }
     const [showDetail] = createResource(() => searchParams.id || showId, getShow, { deferStream: true, initialValue: showDefault })
+    const episodes = createMemo(() => showDetail().playlists.sort((a, b) => a.nom.localeCompare(b.nom)))
 
     async function getShow(): Promise<XcShow> {
         const searchShowId = Number(searchParams.id || showId)
@@ -35,7 +36,7 @@ export default function Show() {
                 </p>
 
                 <div class="flex flex-row justify-center flex-wrap mt-4 lg:justify-start">
-                    <For each={showDetail().playlists}>{(season, i) =>
+                    <For each={episodes()}>{(season, i) =>
                         <div class="p-2" onClick={() => navigator("/season/" + season.id)}>
                             <SeasonCover name={season.nom} imageUrl={season.cover} />
                         </div>
