@@ -9,8 +9,6 @@ export function ShowCover(
 ) {
     const [showAlternativeUi, setShowAlternativeUi] = createSignal(false)
 
-    console.log("Show " + props.imageUrl)
-
     return <div class="w-full h-full rounded-lg overflow-clip">
         <Show
             when={!showAlternativeUi() && props.imageUrl != undefined}
