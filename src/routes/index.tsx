@@ -11,7 +11,7 @@ export default function Home() {
       <img class="mt-4 w-80 h-80 mb-2" src={Logo} />
       <h4 class="mb-8 mt-4 text-2xl font-semibold text-white">Benvinguts a {siteName}</h4>
 
-      <div class="flex flex-row justify-center gap-4 flex-wrap mx-3 lg:mx-0">
+      <div class="flex flex-row justify-center gap-4 flex-wrap mx-3 md:mx-0">
         <ImageCard
           imgUrl={mainShowOnline}
           title={mainShow}

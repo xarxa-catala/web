@@ -1,7 +1,7 @@
 export default function ImageCard(props: { imgUrl: string, title: string, linkUrl: string, description: string }) {
 
   return <>
-    <div class="rounded-lg w-full lg:w-72  group overflow-clip bg-slate-700">
+    <div class="rounded-lg w-full md:w-72  group overflow-clip bg-slate-700">
       <a href={props.linkUrl}>
         <div class="w-full h-auto overflow-clip">
           <img src={props.imgUrl} class="group-hover:scale-110 transition-transform duration-200 w-full h-full" alt="..." />
