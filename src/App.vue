@@ -30,7 +30,7 @@
                       href="https://mega.nz/folder/HNYnALBJ#Rt-t-4n_5PAntz79kbpOnA">Volums</a></li>
                   <li>
                     <a class="dropdown-item" target="_blank"
-                      href="https://lectortmo.com/library/manga/126/one-piece-catala">
+                      href="https://lectormanga.com/library/manga/126/one-piece-catala">
                       TuMangaOnline
                     </a>
                   </li>
