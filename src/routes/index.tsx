@@ -26,7 +26,7 @@ export default function Home() {
 
         <ImageCard
           imgUrl={XarxaCatalaLogo}
-          title="Xarxa Catala"
+          title="Xarxa Català"
           linkUrl="https://xarxacatala.cat"
           description="Clica per descobrir tots els nostres projectes i més informació sobre Xarxa Català."
         />
