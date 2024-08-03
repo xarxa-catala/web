@@ -3,7 +3,8 @@ import OpLogo from "~/assets/op_logo.png"
 
 export interface ExternalPage {
     displayName: string,
-    url: string,
+    url: string | undefined,
+    nestedPages: ExternalPage[],
 }
 
 export interface AdditionalShow {
@@ -22,8 +23,8 @@ const dwShow : Show = {
         // { id: 5, name: "The Sarah Jane Adventures" },
     ],
     externalPages: [
-        { displayName: "L'Illa punteria", url: "https://lillapunteria.carrd.co/" },
-        { displayName: "Qui som", url: "https://xarxacatala.cat/" },
+        { displayName: "L'Illa punteria", url: "https://lillapunteria.carrd.co/", nestedPages: [] },
+        { displayName: "Qui som", url: "https://xarxacatala.cat/", nestedPages: [] },
     ],
     mainShowCover: "/images/home/dw_online.webp",
     telegramLink: "https://t.me/+P9WOZ_LD8NFpkcp5",
@@ -38,8 +39,18 @@ const opShow : Show = {
     logo: OpLogo,
     additionalShows: [],
     externalPages: [
-        { displayName: "L'Illa punteria", url: "https://lillapunteria.carrd.co/" },
-        { displayName: "Qui som", url: "https://xarxacatala.cat/" },
+        { displayName: "L'Illa punteria", url: "https://lillapunteria.carrd.co/", nestedPages: [] },
+        { 
+            displayName: "Manga català", 
+            url: undefined, 
+            nestedPages: [
+                { displayName: "Capítols [MEGA]", url: "https://mega.nz/folder/Od4X0YTB#hSQjtzlpz392MsXYE8AnIg", nestedPages: [] },
+                { displayName: "Volums [MEGA]", url: "https://mega.nz/folder/HNYnALBJ#Rt-t-4n_5PAntz79kbpOnA", nestedPages: [] },
+                { displayName: "Especials [MEGA]", url: "https://mega.nz/folder/mMB13RCC#oZIYj4xCzmhmxNLEz0hwsg", nestedPages: [] },
+                { displayName: "TuMangaOnline", url: "https://lectormanga.com/library/manga/126/one-piece-catala", nestedPages: [] },
+            ] 
+        },
+        { displayName: "Qui som", url: "https://xarxacatala.cat/", nestedPages: [] },
     ],
     mainShowCover: "/images/home/op_card.webp",
     telegramLink: "https://t.me/onepiececatala",

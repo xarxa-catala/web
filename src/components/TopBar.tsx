@@ -61,10 +61,22 @@ export function TopBar() {
                     </div>
                 </Show>
                 <For each={currentShow.externalPages}>{(page) =>
-                    <ToolbarMenuEntry
-                        name={page.displayName}
-                        url={page.url}
-                        onClick={() => { }} />
+                    <div class="lg:inline-block lg:w-auto group w-full">
+
+                        <ToolbarMenuEntry
+                            name={page.displayName}
+                            url={page.url}
+                            onClick={() => { }} />
+
+                        <div class="lg:-ml-4 lg:fixed flex-col lg:group-hover:flex lg:hidden rounded overflow-clip lg:rounded-none" classList={{ "flex": isOtherShowsExpanded(), "hidden": !isOtherShowsExpanded() }}>
+                            <For each={page.nestedPages}>{(innerPage) =>
+                                <DropdownMenuEntry
+                                    name={innerPage.displayName}
+                                    url={innerPage.url}
+                                    onClick={() => { }} />
+                            }</For>
+                        </div>
+                    </div>
                 }</For>
             </div>
         </div>
