@@ -9,5 +9,5 @@ export default defineConfig({
       targets: ['defaults', 'not IE 11'],
     })
   ],
-  server: { port: 3000 },
+  server: { port: 3001 },
 });

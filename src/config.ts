@@ -71,5 +71,5 @@ export interface Show {
     instagramLink: string | undefined,
 }
 
-export const currentShow = dwShow
+export const currentShow = opShow
 export const siteName = currentShow.siteName
