@@ -1,8 +1,6 @@
 import { createEffect, createMemo, createResource, For, Show } from "solid-js"
 import { useParams, useSearchParams } from "solid-start"
-import { Episode } from "~/models/Episode"
 import { EpisodeCover } from "~/components/EpisodeCover"
-import { showId } from "~/config"
 import { Season } from "~/models/Season"
 import { VideoPlayer } from "~/components/VideoPlayer"
 import { setFullScreen } from "~/root"

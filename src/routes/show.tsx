@@ -1,7 +1,7 @@
 import { createMemo, createResource, createSignal, For, onMount } from "solid-js"
 import { useNavigate, useSearchParams } from "solid-start";
 import { Season } from "~/models/Season";
-import { showId } from "~/config"
+import { currentShow } from "~/config"
 import { SeasonCover } from "~/components/SeasonCover";
 import { getShowDetail } from "~/service";
 import { ShowCover } from "~/components/ShowCover";
@@ -11,17 +11,17 @@ export default function Show() {
     const navigator = useNavigate()
     const [searchParams] = useSearchParams<{ id: string }>()
     const showDefault: XcShow = { nom: "", description: "", playlists: [], id: 0, cover: "" }
-    const [showDetail] = createResource(() => searchParams.id || showId, getShow, { deferStream: true, initialValue: showDefault })
+    const [showDetail] = createResource(() => searchParams.id || currentShow.mainShowId, getShow, { deferStream: true, initialValue: showDefault })
     const episodes = createMemo(() => showDetail().playlists.sort((a, b) => a.nom.localeCompare(b.nom)))
 
     async function getShow(): Promise<XcShow> {
-        const searchShowId = Number(searchParams.id || showId)
+        const searchShowId = Number(searchParams.id || currentShow.mainShowId)
 
         return await getShowDetail(searchShowId) || showDefault
     }
 
     return <div class="flex flex-col items-center w-full">
-        <div class="flex flex-row mx-4 lg:w-3/5 gap-4 mt-8 flex-wrap justify-center">
+        <div class="flex flex-col mx-4 lg:flex-row lg:w-3/4 gap-4 mt-8 flex-wrap items-center lg:items-start justify-center">
             <div
                 class="w-80 h-[480px]">
                 <ShowCover

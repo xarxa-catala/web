@@ -1,6 +1,6 @@
 import { createSignal, For, Show } from "solid-js"
 import { useNavigate } from "solid-start"
-import { siteName, externalPages, mainShow, additionalShows } from "~/config"
+import { currentShow } from "~/config"
 
 export function TopBar() {
     const [isMenuExpanded, setIsMenuExpanded] = createSignal(false)
@@ -16,7 +16,7 @@ export function TopBar() {
             }}
             class="flex items-center flex-shrink-0 text-white mr-6 py-4"
         >
-            <span class="font-semibold text-xl tracking-tight">{siteName}</span>
+            <span class="font-semibold text-xl tracking-tight">{currentShow.siteName}</span>
         </button>
         <div class="block lg:hidden">
             <button
@@ -31,14 +31,14 @@ export function TopBar() {
         <div class="w-full mb-2 lg:mb-0 lg:mt-0 block flex-grow lg:flex lg:items-center lg:w-auto" classList={{ 'hidden': !isMenuExpanded() }}>
             <div class="text-sm">
                 <ToolbarMenuEntry
-                    name={mainShow}
+                    name={currentShow.mainShowName}
                     url={undefined}
                     onClick={() => {
                         navigator("show")
                         setIsMenuExpanded(false)
                     }} />
 
-                <Show when={additionalShows.length > 0}>
+                <Show when={currentShow.additionalShows.length > 0}>
                     <div class="lg:inline-block lg:w-auto group w-full">
                         <ToolbarMenuEntry
                             name={"Altres sèries"}
@@ -47,7 +47,7 @@ export function TopBar() {
 
 
                         <div class="lg:-ml-4 lg:fixed flex-col lg:group-hover:flex lg:hidden rounded overflow-clip lg:rounded-none" classList={{ "flex": isOtherShowsExpanded(), "hidden": !isOtherShowsExpanded() }}>
-                            <For each={additionalShows}>{(page) =>
+                            <For each={currentShow.additionalShows}>{(page) =>
                                 <DropdownMenuEntry
                                     name={page.name}
                                     url={undefined}
@@ -60,7 +60,7 @@ export function TopBar() {
                         </div>
                     </div>
                 </Show>
-                <For each={externalPages}>{(page) =>
+                <For each={currentShow.externalPages}>{(page) =>
                     <ToolbarMenuEntry
                         name={page.displayName}
                         url={page.url}

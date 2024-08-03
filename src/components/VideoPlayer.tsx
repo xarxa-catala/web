@@ -92,6 +92,7 @@ export function VideoPlayer(props: { title: string, url: string, goBack: () => a
     }
 
     function changePlayPause() {
+        console.log("Show: " + showVideoControls())
         if (video != null && showVideoControls()) {
             if (video != null) {
                 if (isVideoPlaying(video)) {
