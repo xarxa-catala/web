@@ -25,7 +25,7 @@ const dwShow : Show = {
         { displayName: "L'Illa punteria", url: "https://lillapunteria.carrd.co/" },
         { displayName: "Qui som", url: "https://xarxacatala.cat/" },
     ],
-    mainShowCover: "/images/home/op-card.webp",
+    mainShowCover: "/images/home/dw_online.webp",
     telegramLink: "https://t.me/+P9WOZ_LD8NFpkcp5",
     twitterLink: "https://twitter.com/dwcatala",
     instagramLink: undefined 
@@ -60,5 +60,5 @@ export interface Show {
     instagramLink: string | undefined,
 }
 
-export const currentShow = opShow
+export const currentShow = dwShow
 export const siteName = currentShow.siteName
