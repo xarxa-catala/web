@@ -23,7 +23,7 @@ const dwShow : Show = {
         // { id: 5, name: "The Sarah Jane Adventures" },
     ],
     externalPages: [
-        { displayName: "L'Illa punteria", url: "https://lillapunteria.carrd.co/", nestedPages: [] },
+        { displayName: "L'illa Punteria", url: "https://lillapunteria.carrd.co/", nestedPages: [] },
         { displayName: "Qui som", url: "https://xarxacatala.cat/", nestedPages: [] },
     ],
     mainShowCover: "/images/home/dw_online.webp",
@@ -39,7 +39,7 @@ const opShow : Show = {
     logo: OpLogo,
     additionalShows: [],
     externalPages: [
-        { displayName: "L'Illa punteria", url: "https://lillapunteria.carrd.co/", nestedPages: [] },
+        { displayName: "L'illa Punteria", url: "https://lillapunteria.carrd.co/", nestedPages: [] },
         { 
             displayName: "Manga català", 
             url: undefined, 

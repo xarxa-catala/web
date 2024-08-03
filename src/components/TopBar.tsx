@@ -68,7 +68,7 @@ export function TopBar() {
                             url={page.url}
                             onClick={() => { }} />
 
-                        <div class="lg:-ml-4 lg:fixed flex-col lg:group-hover:flex lg:hidden rounded overflow-clip lg:rounded-none" classList={{ "flex": isOtherShowsExpanded(), "hidden": !isOtherShowsExpanded() }}>
+                        <div class="lg:-ml-4 lg:fixed flex-col lg:group-hover:flex lg:hidden rounded overflow-clip lg:rounded-none flex">
                             <For each={page.nestedPages}>{(innerPage) =>
                                 <DropdownMenuEntry
                                     name={innerPage.displayName}
