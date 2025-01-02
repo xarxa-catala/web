@@ -47,7 +47,7 @@ const opShow : Show = {
                 { displayName: "Capítols [MEGA]", url: "https://mega.nz/folder/Od4X0YTB#hSQjtzlpz392MsXYE8AnIg", nestedPages: [] },
                 { displayName: "Volums [MEGA]", url: "https://mega.nz/folder/HNYnALBJ#Rt-t-4n_5PAntz79kbpOnA", nestedPages: [] },
                 { displayName: "Especials [MEGA]", url: "https://mega.nz/folder/mMB13RCC#oZIYj4xCzmhmxNLEz0hwsg", nestedPages: [] },
-                { displayName: "TuMangaOnline", url: "https://lectormanga.com/library/manga/126/one-piece-catala", nestedPages: [] },
+                { displayName: "MangaDex", url: "https://mangadex.org/user/bf87bf74-000b-42d5-a146-cc7bc1229a7c/yohohoscanlation?tab=uploads", nestedPages: [] },
             ] 
         },
         { displayName: "Qui som", url: "https://xarxacatala.cat/", nestedPages: [] },
